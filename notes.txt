@@ -1,0 +1,24 @@
+
+FEATURE IDEAS
+
+1) We will maintian a collection of words we have seen. If the user enters an unseen word n times, we will add it to our collection.
+
+2) If user enters an unseen word, we will guess and recommend word(s) that the user might have intended to enter (can be a misspelling/typo).
+   Some ways we can make this prediction: 
+				        a) Words that are closest in distance to this word.
+					b) We can maintain a map of common typos to the correct word.
+					c) Hidden Markov model
+
+3) If the user has enterted one or more words, we will look at our probablity distribution and suggest N words that are most likely to follow.
+   We will start with the pentagram probability and switch down until we find a non-zero n-gram. We can also swith down if the n-gram doesn't have 
+   enough data. 
+
+4) If the user is writing a word, we can find N most common words with the same prefix, calulate the n-gram probability for each of them, and suggest the word with the highest probability.
+
+5) The prediction and suggestion must happen in real time.
+
+6) It might not be practical to process our entire corpus everytime the program is run, so we might need to save the corpus in some processed form in the disk.
+
+7) We can maintain our initial corpus and the user corpus. The user corpus will be constantly updated everytime user types something. If enough data has been accumulated in the user corpus, we might choose to either stop using the initial corpus at all or we might give more weight to phrases in the user corpus than in the initial corpus.
+
+DESIGN IDEAS
