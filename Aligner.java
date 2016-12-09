@@ -1,3 +1,6 @@
+import java.io.*;
+import java.util.*;
+
 public class Aligner {
     
     //Helper method for determining the min value in 2D array                                       
