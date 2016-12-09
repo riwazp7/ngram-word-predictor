@@ -11,39 +11,50 @@ import java.util.Scanner;
 
 public class Tokenizer {
   
-  //HashMap that stores word and index it appears in the file
-  HashMap<String,ArrayList<Integer>> indexedWords = new HashMap<String,ArrayList<Integer>>();
-  int totalWords = 0;
-  
-  public static List<String> tokenize(String filename)
-                              throws FileNotFoundException {
-    List<String> result = new ArrayList<String>();
+    // Inner List will contain 5 words in order from the file
+    List<List<String>> pentagram = new ArrayList<List<String>>();
     
-    Scanner fileScanner = new Scanner(new File(filename));
+    String corpus = new String;
     
-    //used to index words in HashMap
-    int index = 0;
+    public static List<List<String>> tokenize(String filename)
+	          throws FileNotFoundException {
+	
+	Scanner fileScanner = new Scanner(new File(filename));
+	
+	//store all strings in result list
+	while (fileScanner.hasNextLine()) {	  
+	    corpus += fileScanner.nextLine();
+	}
+
+	String[] sentences = corpus.split("\\.");
+	String first = "\1";
+	String second = "\2";
+	String third = "\3";
+	String fourth = "\4";
+
+	for(int i = 0; i < sentences.length; i++){
+	    String[] words = sentences[i].split(" ");
+	  for(int j = 0; j < words.length; j++){
+		  if( j == 0 ){
+		    PentaGram p = new PentaGram(first,second,third,fourth,words[j]);
+		  } else if ( j == 1 ) {
+		    PentaGram p = new PentaGram(second,third,fourth,words[j-1],words[j]);
+		  } else if ( j == 2 ) {
+		    PentaGram p = new PentaGram(third,fourth,words[j-2],words[j-1],words[j]);
+		  } else if ( j == 3 ){
+		    PentaGram p = new PentaGram(fourth,words[j-3],words[j-2],words[j-1],words[j]);
+		  } else {
+		    PentaGram p = new PentaGram(words[j-4],words[j-3],words[j-2],words[j-1],words[j]);
+		  }
+	   }	    
+	}
       
-    while (fileScanner.hasNext()) {
-      String word = fileScanner.next();      
-      if(!indexedWords.containsKey(word)){
-        ArrayList<Integer> indices = new ArrayList<Integer>();
-        indices.add(index++);
-        indexedWords.put(word,indices);
-      } else {
-        ArrayList<Integer> indices = indexedWords.get(word);
-        indices.add(index++);
-        indexedWords.put(word,indices);  
-      }      
-      result.add(word);
-      totalWords += 1;
+	return pentagram;
     }
-    return result;
-  }
-
-  public static void main(String[] args) {
-    // TEST
-
-  }
-
+    
+    public static void main(String[] args) {
+	// TEST
+	
+    }
+    
 }
