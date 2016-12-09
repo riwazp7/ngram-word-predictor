@@ -8,12 +8,12 @@ public class Aligner {
     public static int[][][] computeBackpointers( String s0, String s1 ) throws NullPointerException {
         if ( s0 == null || s1 == null ) throw new NullPointerException();
 
-	      int[][][] backptr = new int[s0.length()+1][s1.length()+1][2];
+	int[][][] backptr = new int[s0.length()+1][s1.length()+1][2];
 
         /**                                                                                                      
          * Use a 2D array to help with determining the backpointers. The 2D array will be filled with all the edit               
          * distance values at each letter in both strings, using method from lecture.                 
-	       **/
+	 **/
         int [][] arr = new int[s0.length()+1][s1.length()+1];
 
         for(int i = 0; i <= s0.length(); i++){ arr[i][0] = i; }
@@ -33,7 +33,7 @@ public class Aligner {
         int i = s0.length();
         int j = s1.length();
 
-	      //To determine the coordinates of a backpointer, you find the min adjacent value                                                
+	//To determine the coordinates of a backpointer, you find the min adjacent value                                                
         while( i > 0 && j > 0 ){
             int near_min = minimum( arr[i-1][j], arr[i][j-1], arr[i-1][j-1] );
             if( near_min == arr[i-1][j-1] ){
@@ -41,11 +41,11 @@ public class Aligner {
                 backptr[i][j][1] = j - 1;
                 i -= 1;
                 j -= 1;
-            }else if( near_min == arr[i][j-1] ){
+            } else if( near_min == arr[i][j-1] ){
                 backptr[i][j][0] = i;
                 backptr[i][j][1] = j - 1;
                 j -= 1;
-            }else{
+            } else{
                 backptr[i][j][0] = i - 1;
                 backptr[i][j][1] = j;
                 i -= 1;
@@ -68,8 +68,8 @@ public class Aligner {
 
         /**                                                                                                                                
          * Compare values in cells [i-1][j],[i][j-1],[i-1][j-1] given we're in cell [i][j]. 
-	       * If [i-1][j-1] has the lowest value, align s[i] and t[j] then go to [i-1][j-1]        
-	       * If [i][j-1] has lowest value, align t[j] with " " go to [i][j-1]                                                             
+	 * If [i-1][j-1] has the lowest value, align s[i] and t[j] then go to [i-1][j-1]        
+	 * If [i][j-1] has lowest value, align t[j] with " " go to [i][j-1]                                                             
          * If [i-1][j] has lowest value, align s[i] with " " go to [i-1][j]  
          **/
         while( coord1 > 0 && 0 < coord2 ){
