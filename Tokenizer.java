@@ -11,16 +11,14 @@ import java.util.Scanner;
 
 public class Tokenizer {
   
-    // Inner List will contain 5 words in order from the file
-    List<List<String>> pentagram = new ArrayList<List<String>>();
-    
+
     String corpus = new String;
     
-    public static List<List<String>> tokenize(String filename)
+    public static LinkedList<PentaGram> tokenize(String filename)
 	          throws FileNotFoundException {
 	
 	Scanner fileScanner = new Scanner(new File(filename));
-	
+	LinkedList<PentaGram> result = new LinkedList<PentaGram>();
 	//store all strings in result list
 	while (fileScanner.hasNextLine()) {	  
 	    corpus += fileScanner.nextLine();
@@ -33,24 +31,24 @@ public class Tokenizer {
 	String fourth = "\4";
 
 	for(int i = 0; i < sentences.length; i++){
-	    String[] words = sentences[i].split(" ");
-	  for(int j = 0; j < words.length; j++){
-		  if( j == 0 ){
-		    PentaGram p = new PentaGram(first,second,third,fourth,words[j]);
-		  } else if ( j == 1 ) {
-		    PentaGram p = new PentaGram(second,third,fourth,words[j-1],words[j]);
-		  } else if ( j == 2 ) {
-		    PentaGram p = new PentaGram(third,fourth,words[j-2],words[j-1],words[j]);
-		  } else if ( j == 3 ){
-		    PentaGram p = new PentaGram(fourth,words[j-3],words[j-2],words[j-1],words[j]);
-		  } else {
-		    PentaGram p = new PentaGram(words[j-4],words[j-3],words[j-2],words[j-1],words[j]);
-		  }
-	   }	    
+		String[] words = sentences[i].split(" ");
+		for(int j = 0; j < words.length; j++){
+			if( j == 0 ){
+		    	PentaGram p = new PentaGram(first,second,third,fourth,words[j]);
+		  	} else if ( j == 1 ) {
+		    	PentaGram p = new PentaGram(second,third,fourth,words[j-1],words[j]);
+		  	} else if ( j == 2 ) {
+		    	PentaGram p = new PentaGram(third,fourth,words[j-2],words[j-1],words[j]);
+		  	} else if ( j == 3 ){
+		    	PentaGram p = new PentaGram(fourth,words[j-3],words[j-2],words[j-1],words[j]);
+		  	} else {
+		    	PentaGram p = new PentaGram(words[j-4],words[j-3],words[j-2],words[j-1],words[j]);
+		  	}
+	   	}
+		result.add(p);
 	}
-      
-	return pentagram;
-    }
+      return pentagram;
+	}
     
     public static void main(String[] args) {
 	// TEST
