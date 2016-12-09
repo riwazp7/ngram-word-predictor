@@ -5,11 +5,11 @@
 public class Node {
 
   String word;
-  Int frequency;
+  int frequency;
   Node parent;
 
   class Node(Node parent, String word, Int frequency) {
-  	this.parent = parent;
+    this.parent = parent;
     this.word = word;
     this.frequency = frequency;
   }
