@@ -27,7 +27,9 @@ public class Node {
         if (childrenIndex.containsKey(nextWord)) {
             children.get(childrenIndex.get(nextWord)).add(p);
         } else {
-            children.add(new ChildNode(nextWord, level + 1));
+            ChildNode child = new ChildNode(nextWord, level + 1);
+            children.add(child);
+            child.add(p);
             childrenIndex.put(nextWord, children.size() - 1);
         }
         updates++;
@@ -39,11 +41,12 @@ public class Node {
     // Use wisely
     @Override
     public String toString() {
-        String result = "ROOT" + "\n";
-        for (Node node : children) {
-            result += node.toString();
+        String result =  "ROOT-->" + "(";
+        for (int i = 0; i < children.size() - 1; i++) {
+            Node node = children.get(i);
+            result += (node.toString() + ", ");
         }
-        return result + "\n\n";
+        return result + children.get(children.size() - 1) + ")";
     }
 
 }

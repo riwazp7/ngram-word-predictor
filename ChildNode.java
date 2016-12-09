@@ -5,9 +5,9 @@
 public class ChildNode extends Node implements Comparable<ChildNode> {
 
 
-    // This node's word and it's frequency. Init count is always 1.
+    // This node's word and it's frequency.
     String word;
-    Integer count = 1;
+    Integer count = 0;
 
     int level;
 
@@ -19,7 +19,19 @@ public class ChildNode extends Node implements Comparable<ChildNode> {
     public void add(PentaGram p) {
         count += 1;
         if (level < 4) {
-            super.add(p);
+            String nextWord = p.getWord(level + 1);
+            if (childrenIndex.containsKey(nextWord)) {
+                children.get(childrenIndex.get(nextWord)).add(p);
+            } else {
+                ChildNode child = new ChildNode(nextWord, level + 1);
+                children.add(child);
+                child.add(p);
+                childrenIndex.put(nextWord, children.size() - 1);
+            }
+            updates++;
+            if (updates > SORT_THRESHOLD) {
+                sortArrayList();
+            }
         }
     }
 
@@ -31,11 +43,13 @@ public class ChildNode extends Node implements Comparable<ChildNode> {
     // Use wisely
     @Override
     public String toString() {
-        String result = word + ":" + count + "\n";
-        for (Node node : children) {
-            result += node.toString();
+        String result = word + ":" + count + "-->" + "(";
+        if (level == 4) return result + ")";
+        for (int i = 0; i < children.size() - 1; i++) {
+            Node node = children.get(i);
+            result += (node.toString() + ", ");
         }
-        return result + "\n\n";
+        return result + children.get(children.size() - 1) + ")";
     }
 
 }
