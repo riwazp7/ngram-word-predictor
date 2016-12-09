@@ -10,13 +10,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Tokenizer {
+  
+  //HashMap that stores word and index it appears in the file
+  HashMap<String,ArrayList<Integer>> indexedWords = new HashMap<String,ArrayList<Integer>>();
 
   public static List<String> tokenize(String filename)
                               throws FileNotFoundException {
     List<String> result = new ArrayList<String>();
-    
-    //HashMap that stores word and index it appears in the file
-    HashMap<String,ArrayList<Integer>> indexedWords = new HashMap<String,ArrayList<Integer>>();
     
     Scanner fileScanner = new Scanner(new File(filename));
     
