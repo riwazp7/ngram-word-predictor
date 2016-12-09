@@ -14,9 +14,27 @@ public class Tokenizer {
   public static List<String> tokenize(String filename)
                               throws FileNotFoundException {
     List<String> result = new ArrayList<String>();
+    
+    //HashMap that stores word and index it appears in the file
+    HashMap<String,ArrayList<Integer>> indexedWords = new HashMap<String,ArrayList<Integer>>();
+    
     Scanner fileScanner = new Scanner(new File(filename));
+    
+    //used to index words in HashMap
+    int index = 0;
+      
     while (fileScanner.hasNext()) {
-      result.add(fileScanner.next());
+      String word = fileScanner.next();      
+      if(!indexedWords.containsKey(word)){
+        ArrayList<Integer> indices = new ArrayList<Integer>();
+        indices.add(index++);
+        indexedWords.put(word,indices);
+      } else {
+        ArrayList<Integer> indices = indexedWords.get(word);
+        indices.add(index++);
+        indexedWords.put(word,indices);  
+      }      
+      result.add(word);
     }
     return result;
   }
