@@ -13,7 +13,8 @@ public class Tokenizer {
   
   //HashMap that stores word and index it appears in the file
   HashMap<String,ArrayList<Integer>> indexedWords = new HashMap<String,ArrayList<Integer>>();
-
+  int totalWords = 0;
+  
   public static List<String> tokenize(String filename)
                               throws FileNotFoundException {
     List<String> result = new ArrayList<String>();
@@ -35,6 +36,7 @@ public class Tokenizer {
         indexedWords.put(word,indices);  
       }      
       result.add(word);
+      totalWords += 1;
     }
     return result;
   }
