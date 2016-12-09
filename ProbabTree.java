@@ -19,8 +19,12 @@ public class ProbabTree {
     }
 
     public static void main(String[] args) {
+        // ******** TEST ***********
         ProbabTree tree = new ProbabTree();
         tree.add(new PentaGram("the","big","brown","fox","jumped"));
+        tree.add(new PentaGram("the","big","brown","fox","jumped"));
+        tree.add(new PentaGram("the","big","man","is","nice"));
+        tree.add(new PentaGram("a","big","man","is","nice"));
         System.out.println(tree);
     }
 
