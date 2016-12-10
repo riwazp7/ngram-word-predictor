@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A ChildNode object
  **/
@@ -5,9 +8,8 @@
 public class ChildNode extends Node implements Comparable<ChildNode> {
 
 
-    // This node's word and it's frequency.
-    String word;
-    Integer count = 0;
+    // This node's word frequency.
+    private Integer count = 0;
 
     int level;
 
@@ -51,6 +53,20 @@ public class ChildNode extends Node implements Comparable<ChildNode> {
             result += (node.toString() + ", ");
         }
         return result + children.get(children.size() - 1) + ")";
+    }
+
+    @Override
+    public List<String> predict(NGram n) {
+        if (this.level - 1 == MAX_LEVEL) {
+            List<String> result = new ArrayList<>();
+            for (int i = 0; i < ProbTree.NO_OF_SUGGESTION && i < children.size(); i++) {
+                result.add(children.get(i).getWord());
+            }
+            return result;
+        } else if (childrenIndex.containsKey(n.getWord(level + 1))) {
+            return children.get(childrenIndex.get(n.getWord(level + 1))).predict(n);
+        }
+        return null;
     }
 
 }
