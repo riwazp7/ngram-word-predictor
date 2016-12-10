@@ -29,23 +29,24 @@ public class Tokenizer {
 		String fourth = "\4";
 
 		for(int i = 0; i < sentences.length; i++){
+			PentaGram p;
 	    	String[] words = sentences[i].split(" ");
 	    	for(int j = 0; j < words.length; j++){
 			if( j == 0 ){
-		    	PentaGram p = new PentaGram(new String[] {first,second,third,fourth,words[j]});
+				p = new PentaGram(new String[] {first,second,third,fourth,words[j]});
 			} else if ( j == 1 ) {
-		    	PentaGram p = new PentaGram(new String[] {second,third,fourth,words[j-1],words[j]});
+		    	p = new PentaGram(new String[] {second,third,fourth,words[j-1],words[j]});
 			} else if ( j == 2 ) {
-		    	PentaGram p = new PentaGram(new String[] {third,fourth,words[j-2],words[j-1],words[j]});
+		    	p = new PentaGram(new String[] {third,fourth,words[j-2],words[j-1],words[j]});
 			} else if ( j == 3 ){
-		    	PentaGram p = new PentaGram(new String[] {fourth,words[j-3],words[j-2],words[j-1],words[j]});
+		    	p = new PentaGram(new String[] {fourth,words[j-3],words[j-2],words[j-1],words[j]});
 			} else {
-		    	PentaGram p = new PentaGram(new String[] {words[j-4],words[j-3],words[j-2],words[j-1],words[j]});
+				p = new PentaGram(new String[]{words[j - 4], words[j - 3], words[j - 2], words[j - 1], words[j]});
 			}
-			result.add(p);
+				result.add(p);
 	    	}
 		}
-		return pentagram;
+		return result;
 	}
     
     public static void main(String[] args) {
