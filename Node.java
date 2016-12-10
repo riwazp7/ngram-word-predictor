@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * A Node object is going to have a parent, word and frequency
@@ -14,6 +15,9 @@ public class Node {
     HashMap<String, Integer> childrenIndex = new HashMap<>();
 
     protected final int MAX_LEVEL;
+
+    protected String word;
+
 
     public Node(int MAX_LEVEL) {
         this.MAX_LEVEL = MAX_LEVEL;
@@ -44,8 +48,15 @@ public class Node {
         }
     }
 
-    public String predict(NGram n) {
+    public List<String> predict(NGram n) {
+        if (childrenIndex.containsKey(n.getWord(level + 1))) {
+            return children.get(childrenIndex.get(n.getWord(level + 1))).predict(n);
+        }
+        return null;
+    }
 
+    public String getWord() {
+        return this.word;
     }
 
     @Override
