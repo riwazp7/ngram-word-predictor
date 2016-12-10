@@ -44,6 +44,10 @@ public class Node {
         }
     }
 
+    public String predict(NGram n) {
+
+    }
+
     @Override
     public String toString() {
         String result =  "ROOT-->" + "(";
