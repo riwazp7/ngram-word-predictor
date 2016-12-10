@@ -3,12 +3,19 @@
  * There's a wrapper method to determine if a word is in the HashSet
  **/
 
+import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+
+
 public class Filter {
     
-    public void Filter() {
+    HashSet<String> words;
 
+    public void Filter(String filename) 
+	throws FileNotFoundException {
 	// Create the HashSet that will store all words
-	HashSet words = new HashSet();
+	words = new HashSet<String>();
 	
 	Scanner fileScanner = new Scanner(new File(filename));
 	while(fileScanner.hasNextLine()){
