@@ -23,23 +23,20 @@ public class Tokenizer {
 		}
 
 		String[] sentences = corpus.split("\\.");
-		String first = "\1";
-		String second = "\2";
-		String third = "\3";
-		String fourth = "\4";
+		String filler = "\1";
 
 		for(int i = 0; i < sentences.length; i++){
 			PentaGram p;
 	    	String[] words = sentences[i].split(" ");
 	    	for(int j = 0; j < words.length; j++){
 			if( j == 0 ){
-				p = new PentaGram(new String[] {first,second,third,fourth,words[j]});
+				p = new PentaGram(new String[] {filler,filler,filler,filler,words[j]});
 			} else if ( j == 1 ) {
-		    	p = new PentaGram(new String[] {second,third,fourth,words[j-1],words[j]});
+		    	p = new PentaGram(new String[] {filler,filler,filler,words[j-1],words[j]});
 			} else if ( j == 2 ) {
-		    	p = new PentaGram(new String[] {third,fourth,words[j-2],words[j-1],words[j]});
+		    	p = new PentaGram(new String[] {filler,filler,words[j-2],words[j-1],words[j]});
 			} else if ( j == 3 ){
-		    	p = new PentaGram(new String[] {fourth,words[j-3],words[j-2],words[j-1],words[j]});
+		    	p = new PentaGram(new String[] {filler,words[j-3],words[j-2],words[j-1],words[j]});
 			} else {
 				p = new PentaGram(new String[]{words[j - 4], words[j - 3], words[j - 2], words[j - 1], words[j]});
 			}
