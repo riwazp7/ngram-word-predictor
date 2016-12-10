@@ -5,8 +5,7 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Tokenizer {
@@ -34,15 +33,15 @@ public class Tokenizer {
 	    String[] words = sentences[i].split(" ");
 	    for(int j = 0; j < words.length; j++){
 		if( j == 0 ){
-		    PentaGram p = new PentaGram(first,second,third,fourth,words[j]);
+		    PentaGram p = new PentaGram(new String[] {first,second,third,fourth,words[j]});
 		} else if ( j == 1 ) {
-		    PentaGram p = new PentaGram(second,third,fourth,words[j-1],words[j]);
+		    PentaGram p = new PentaGram(new String[] {second,third,fourth,words[j-1],words[j]});
 		} else if ( j == 2 ) {
-		    PentaGram p = new PentaGram(third,fourth,words[j-2],words[j-1],words[j]);
+		    PentaGram p = new PentaGram(new String[] {third,fourth,words[j-2],words[j-1],words[j]});
 		} else if ( j == 3 ){
-		    PentaGram p = new PentaGram(fourth,words[j-3],words[j-2],words[j-1],words[j]);
+		    PentaGram p = new PentaGram(new String[] {fourth,words[j-3],words[j-2],words[j-1],words[j]});
 		} else {
-		    PentaGram p = new PentaGram(words[j-4],words[j-3],words[j-2],words[j-1],words[j]);
+		    PentaGram p = new PentaGram(new String[] {words[j-4],words[j-3],words[j-2],words[j-1],words[j]});
 		}
 		result.add(p);
 	    }	    
