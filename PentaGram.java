@@ -1,15 +1,14 @@
 /**
  * Created by Riwaz on 12/9/16.
  */
-public class PentaGram {
-    private final String[] words;
+public class PentaGram extends NGram {
 
-    public PentaGram(String s1, String s2, String s3, String s4, String s5) {
-       this.words = new String[] {s1, s2, s3, s4, s5};
-    }
-
-    public String getWord(int i) {
-        return words[i];
+    public PentaGram(String[] words) {
+        this.N = 5;
+        if (words.length != N) {
+            throw new RuntimeException("Pentagram can only be initialized with a 5 long Array");
+        }
+        this.words = words;
     }
 
 }
