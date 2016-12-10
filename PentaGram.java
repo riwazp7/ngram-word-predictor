@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * Created by Riwaz on 12/9/16.
  */
@@ -10,5 +12,12 @@ public class PentaGram extends NGram {
         }
         this.words = words;
     }
+
+    public void printWords() {
+
+        System.out.println(Arrays.toString(words));
+
+    }
+
 
 }
