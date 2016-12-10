@@ -1,4 +1,18 @@
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.LinkedList;
+
 public class WordPredictor {
+
+	ArrayList<LinkedList<PentaGram>> pentaGrams;
+
+	public WordPredictor(String[] fileNames) throws FileNotFoundException {
+		pentaGrams = new ArrayList<LinkedList<PentaGram>>();
+		for(String file : fileNames){
+			LinkedList<PentaGram> pentaGram = Tokenizer.tokenize("\"" + file + "\"");
+			pentaGrams.add(pentaGram);
+		}
+	}
 
     public QuadGram getQuadGram(String words) {
 
