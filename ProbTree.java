@@ -1,13 +1,17 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Riwaz on 12/9/16.
  */
-public class ProbabTree {
+public class ProbTree {
 
     private final int MAX_LEVEL = 4;
+    public static final int NO_OF_SUGGESTION = 4;
 
     Node root;
 
-    public ProbabTree() {
+    public ProbTree() {
         root = new Node(MAX_LEVEL);
     }
 
@@ -15,11 +19,20 @@ public class ProbabTree {
         root.add(p);
     }
 
-    public String predictNextWord(NGram n) {
+    public List<String> predictNextWords(NGram n) {
         if (n.N > MAX_LEVEL) {
             throw new RuntimeException("Cannot predict for " + n + "when MAX_LEVEL is " + MAX_LEVEL);
         }
-        return root.predict(n);
+        List<String> result = new ArrayList<>();
+        while (true) {
+            List<String> prediction = root.predict(n);
+            if (prediction != null) {
+                for (String word : prediction) {
+                    result.add(word);
+                    if (result.size() > NO_OF_SUGGESTION) return result;
+                }
+            }
+        }
     }
 
     @Override
@@ -27,10 +40,8 @@ public class ProbabTree {
         return root.toString();
     }
 
-
-
     public static void main(String[] args) {
-        ProbabTree tree = new ProbabTree();
+        ProbTree tree = new ProbTree();
         tree.add(new PentaGram(new String[] {"the","big","brown","fox","jumped"}));
         tree.add(new PentaGram(new String[] {"the","big","brown","fox","jumped"}));
         tree.add(new PentaGram(new String[] {"the","big","man","is","nice"}));
