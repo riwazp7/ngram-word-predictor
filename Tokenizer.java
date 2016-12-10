@@ -30,7 +30,11 @@ public class Tokenizer {
 	    	String[] words = sentences[i].split(" ");
 	    	for(int j = 0; j < words.length; j++){
 				if( j == 0 ){
-					p = new PentaGram(new String[] {filler,filler,filler,filler,words[j]});
+	    			if(words[j].equals("")) {
+						p = new PentaGram(new String[] {filler,filler,filler,filler,words[++j]});
+					} else {
+						p = new PentaGram(new String[]{filler, filler, filler, filler, words[j]});
+					}
 				} else if ( j == 1 ) {
 		    		p = new PentaGram(new String[] {filler,filler,filler,words[j-1],words[j]});
 				} else if ( j == 2 ) {
@@ -46,9 +50,14 @@ public class Tokenizer {
 		return result;
 	}
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
 	// TEST
-	
-    }
+		LinkedList<PentaGram> gram = Tokenizer.tokenize("test.txt");
+		for(int i = 0; i < gram.size(); i++) {
+			PentaGram p = gram.get(i);
+			p.printWords();
+		}
+
+	}
     
 }
