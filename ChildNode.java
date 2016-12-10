@@ -1,5 +1,5 @@
 /**
- * A Node object is going to have a parent, word and frequency
+ * A ChildNode object
  **/
 
 public class ChildNode extends Node implements Comparable<ChildNode> {
@@ -11,19 +11,21 @@ public class ChildNode extends Node implements Comparable<ChildNode> {
 
     int level;
 
-    public ChildNode(String word, int level) {
+    public ChildNode(String word, int level, int MAX_LEVEL) {
+        super(MAX_LEVEL);
         this.word = word;
         this.level = level;
     }
 
-    public void add(PentaGram p) {
+    @Override
+    public void add(NGram p) {
         count += 1;
-        if (level < 4) {
+        if (level < MAX_LEVEL) {
             String nextWord = p.getWord(level + 1);
             if (childrenIndex.containsKey(nextWord)) {
                 children.get(childrenIndex.get(nextWord)).add(p);
             } else {
-                ChildNode child = new ChildNode(nextWord, level + 1);
+                ChildNode child = new ChildNode(nextWord, level + 1, MAX_LEVEL);
                 children.add(child);
                 child.add(p);
                 childrenIndex.put(nextWord, children.size() - 1);
@@ -40,7 +42,6 @@ public class ChildNode extends Node implements Comparable<ChildNode> {
         return n.count.compareTo(this.count);
     }
 
-    // Use wisely
     @Override
     public String toString() {
         String result = word + ":" + count + "-->" + "(";

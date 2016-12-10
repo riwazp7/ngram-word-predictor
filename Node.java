@@ -13,21 +13,27 @@ public class Node {
     ArrayList<Node> children = new ArrayList<>();
     HashMap<String, Integer> childrenIndex = new HashMap<>();
 
-    // The number of updates to the ArrayList since we last sorted it.
-    int updates = 0;
+    protected final int MAX_LEVEL;
 
-    int level = -1;
+    public Node(int MAX_LEVEL) {
+        this.MAX_LEVEL = MAX_LEVEL;
+    }
+
+    // The number of updates to the ArrayList since we last sorted it.
+    protected int updates = 0;
+
+    private final int level = -1;
 
     protected void sortArrayList() {
         updates = 0;
     }
 
-    public void add(PentaGram p) {
+    public void add(NGram p) {
         String nextWord = p.getWord(level + 1);
         if (childrenIndex.containsKey(nextWord)) {
             children.get(childrenIndex.get(nextWord)).add(p);
         } else {
-            ChildNode child = new ChildNode(nextWord, level + 1);
+            ChildNode child = new ChildNode(nextWord, level + 1, MAX_LEVEL);
             children.add(child);
             child.add(p);
             childrenIndex.put(nextWord, children.size() - 1);
@@ -38,7 +44,6 @@ public class Node {
         }
     }
 
-    // Use wisely
     @Override
     public String toString() {
         String result =  "ROOT-->" + "(";
