@@ -1,4 +1,6 @@
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -40,8 +42,19 @@ public class ProbTree {
         return root.toString();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         ProbTree tree = new ProbTree();
+
+        String[] files = new String[]{"test.txt"};
+
+        WordPredictor grams = new WordPredictor(files);
+        ArrayList<LinkedList<PentaGram>> pentaGrams = grams.pentaGrams;
+
+        for(LinkedList<PentaGram> penta : pentaGrams){
+            for(PentaGram p : penta){
+                tree.add(p);
+            }
+        }
         tree.add(new PentaGram(new String[] {"the","big","brown","fox","jumped"}));
         tree.add(new PentaGram(new String[] {"the","big","brown","fox","jumped"}));
         tree.add(new PentaGram(new String[] {"the","big","man","is","nice"}));
