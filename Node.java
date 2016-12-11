@@ -66,14 +66,12 @@ public class Node implements Comparable<Node> {
         return this.word;
     }
 
-    @Override
-    public String toString() {
-        String result =  "ROOT-->" + "(";
-        for (int i = 0; i < children.size() - 1; i++) {
-            Node node = children.get(i);
-            result += (node.toString() + ", ");
+    public String toString(String soFar) {
+        String result = "";
+        for (Node n : children) {
+            result += (n.toString(""));
         }
-        return result + children.get(children.size() - 1) + ")";
+        return result;
     }
 
     @Override

@@ -27,15 +27,11 @@ public class Tokenizer {
 
 		for(int i = 0; i < sentences.length; i++){
 			NGram p;
+			sentences[i] = sentences[i].trim().toLowerCase();
 	    	String[] words = sentences[i].split(" ");
 	    	for(int j = 0; j < words.length; j++){
-				words[j] = words[j].trim();
 				if( j == 0 ){
-	    			if(words[j].equals("")) {
-						p = new NGram(new String[] {filler,filler,filler,filler,words[++j]});
-					} else {
-						p = new NGram(new String[]{filler, filler, filler, filler, words[j]});
-					}
+					p = new NGram(new String[]{filler, filler, filler, filler, words[j]});
 				} else if ( j == 1 ) {
 		    		p = new NGram(new String[] {filler,filler,filler,words[j-1],words[j]});
 				} else if ( j == 2 ) {

@@ -4,7 +4,7 @@ import java.util.Arrays;
  * Created by Riwaz on 12/10/16.
  */
 public class NGram {
-    public static final String BLANK = "\1";
+    public static final String BLANK = "ICED_TEA";
     protected int N;
     protected String[] words;
 

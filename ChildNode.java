@@ -35,15 +35,15 @@ public class ChildNode extends Node {
         }
     }
 
-    @Override
-    public String toString() {
-        String result = word + ":" + count + "-->" + "(";
-        if (level == 4) return result + ")";
-        for (int i = 0; i < children.size() - 1; i++) {
-            Node node = children.get(i);
-            result += (node.toString() + ", ");
+    public String toString(String soFar) {
+        soFar = soFar + word + ": " + count + " ";
+        if (children.isEmpty()) return soFar + "\n";
+        String result = "";
+        for (Node n : children) {
+            result += (n.toString(soFar) + "\n");
         }
-        return result + children.get(children.size() - 1) + ")";
+        // Just removing the last "\n" for now
+        return result.substring(0,result.length() - 1);
     }
 
     @Override

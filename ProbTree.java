@@ -40,7 +40,7 @@ public class ProbTree {
 
     @Override
     public String toString() {
-        return root.toString();
+        return root.toString("");
     }
 
     public static void main(String[] args) throws FileNotFoundException {
