@@ -31,8 +31,8 @@ public class ProbTree {
             throw new RuntimeException("Cannot predict for " + n + "when MAX_LEVEL is " + MAX_LEVEL);
         }
         List<String> result = new ArrayList<>();
-        while (n.N >= 1) {
-            List<String> prediction = roots[n.N].predict(n);
+        while (n != null && n.N >= 1) {
+            List<String> prediction = roots[n.N - 1].predict(n);
             if (prediction != null) {
                 for (String word : prediction) {
                     result.add(word);
