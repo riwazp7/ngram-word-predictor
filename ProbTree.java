@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by Riwaz on 12/9/16.
+ * Created by Riwaz on 12/9/16. 
  */
 public class ProbTree {
 
@@ -26,7 +26,7 @@ public class ProbTree {
             throw new RuntimeException("Cannot predict for " + n + "when MAX_LEVEL is " + MAX_LEVEL);
         }
         List<String> result = new ArrayList<>();
-        while (true) {
+        while (n.getWord(n.N - 1) != NGram.BLANK) {
             List<String> prediction = root.predict(n);
             if (prediction != null) {
                 for (String word : prediction) {
@@ -34,7 +34,9 @@ public class ProbTree {
                     if (result.size() > NO_OF_SUGGESTION) return result;
                 }
             }
+            n = NGram.insertBlank(n);
         }
+        return result;
     }
 
     @Override
