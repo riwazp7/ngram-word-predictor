@@ -8,16 +8,22 @@ import java.util.List;
 public class ProbTree {
 
     private final int MAX_LEVEL = 4;
-    public static final int NO_OF_SUGGESTION = 6;
+    public static final int NO_OF_SUGGESTION = 4;
 
-    Node root;
+    private Node[] roots;
 
     public ProbTree() {
-        root = new Node(MAX_LEVEL);
+        roots = new Node[MAX_LEVEL];
+        for (int i = 0; i < MAX_LEVEL; i++) {
+            roots[i] = new Node(i + 1);
+        }
     }
 
-    public void add(NGram p) {
-        root.add(p);
+    public void add(NGram n) {
+        for (int i = roots.length - 1; i >= 0; i--) {
+            roots[i].add(n);
+            n = NGram.getOneSmallerNgram(n);
+        }
     }
 
     public List<String> predictNextWords(NGram n) {
@@ -25,31 +31,36 @@ public class ProbTree {
             throw new RuntimeException("Cannot predict for " + n + "when MAX_LEVEL is " + MAX_LEVEL);
         }
         List<String> result = new ArrayList<>();
-        while (!n.getWord(n.N - 1).equals(NGram.BLANK)) {
-            List<String> prediction = root.predict(n);
+        while (n != null && n.N >= 1) {
+            List<String> prediction = roots[n.N - 1].predict(n);
             if (prediction != null) {
                 for (String word : prediction) {
                     result.add(word);
                     if (result.size() > NO_OF_SUGGESTION) return result;
                 }
             }
-            n = NGram.insertBlank(n);
+            n = NGram.getOneSmallerNgram(n);
         }
         return result;
     }
 
     @Override
     public String toString() {
-        return root.toString("");
+        String result = "";
+        for (int i = 0; i < MAX_LEVEL; i++) {
+            result += "*** " + (i+2) + "-grams ***\n";
+            result += (roots[i].toString("") + "\n");
+        }
+        return result;
     }
 
     public static void main(String[] args) throws FileNotFoundException {
         ProbTree tree = new ProbTree();
 
         tree.add(new NGram(new String[] {"the","big","brown","fox","jumped"}));
-        tree.add(new NGram(new String[] {"the","big","brown","fox","jumped"}));
+        //tree.add(new NGram(new String[] {"the","big","brown","fox","jumped"}));
         tree.add(new NGram(new String[] {"the","big","man","is","nice"}));
-        tree.add(new NGram(new String[]{"a","big","man","is","nice"}));
+        tree.add(new NGram(new String[] {"a","big","man","is","nice"}));
         System.out.println(tree);
     }
 

@@ -5,7 +5,7 @@ Basically we only wants lines to end with periods.
 
 import re
 
-with open('words.txt', 'r') as rf:
+with open('bio_of_rabbit.txt', 'r') as rf:
     with open('fixed.txt', 'w') as wf:
 
         for line in rf:
@@ -32,7 +32,8 @@ with open('words.txt', 'r') as rf:
                 wf.write(line.rstrip("\n"))
 
             elif line.endswith("\n"):
-                wf.write(line.rstrip("\n"))
+                wf.write(line.rstrip("\n") + " ")
+
             
             else:
                 #line = line.rstrip(

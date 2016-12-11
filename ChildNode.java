@@ -17,6 +17,9 @@ public class ChildNode extends Node {
 
     @Override
     public void add(NGram p) {
+        if (p.N != MAX_LEVEL + 1) {
+            throw new RuntimeException("Cannot add " + p.N + "-gram to a tree with MAX_LEVEL " + MAX_LEVEL);
+        }
         count += 1;
         if (level < MAX_LEVEL) {
             String nextWord = p.getWord(level + 1);

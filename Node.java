@@ -10,7 +10,7 @@ import java.util.List;
 public class Node implements Comparable<Node> {
 
     // Max updates to the ArrayList before we sort it.
-    protected final int SORT_THRESHOLD = 0;
+    protected final int SORT_THRESHOLD = 5;
 
     ArrayList<Node> children = new ArrayList<>();
     HashMap<String, Integer> childrenIndex = new HashMap<>();
