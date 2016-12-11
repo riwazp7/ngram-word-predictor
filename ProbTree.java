@@ -45,16 +45,6 @@ public class ProbTree {
     public static void main(String[] args) throws FileNotFoundException {
         ProbTree tree = new ProbTree();
 
-        String[] files = new String[]{"test.txt"};
-
-        WordPredictor grams = new WordPredictor(files);
-        ArrayList<LinkedList<NGram>> NGrams = grams.nGrams;
-
-        for(LinkedList<NGram> penta : NGrams){
-            for(NGram p : penta){
-                tree.add(p);
-            }
-        }
         tree.add(new NGram(new String[] {"the","big","brown","fox","jumped"}));
         tree.add(new NGram(new String[] {"the","big","brown","fox","jumped"}));
         tree.add(new NGram(new String[] {"the","big","man","is","nice"}));
