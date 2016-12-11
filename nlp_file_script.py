@@ -30,6 +30,9 @@ with open('words.txt', 'r') as rf:
 
             elif len(line) == 1:
                 wf.write(line.rstrip("\n"))
+
+            elif line.endswith("\n"):
+                wf.write(line.rstrip("\n"))
             
             else:
                 #line = line.rstrip(
