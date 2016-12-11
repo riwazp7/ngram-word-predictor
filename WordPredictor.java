@@ -6,13 +6,18 @@ import java.util.stream.Stream;
 public class WordPredictor {
 
 	ArrayList<LinkedList<NGram>> nGrams;
-
+	ProbTree tree = new ProbTree();
 
 	public WordPredictor(String[] fileNames) throws FileNotFoundException {
-		nGrams = new ArrayList<LinkedList<NGram>>();
+		nGrams = new ArrayList<>();
 		for(String file : fileNames){
 			LinkedList<NGram> NGram = Tokenizer.tokenize(file);
 			nGrams.add(NGram);
+		}
+		for(LinkedList<NGram> penta : nGrams){
+			for(NGram p : penta){
+				tree.add(p);
+			}
 		}
 	}
 
