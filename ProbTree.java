@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by Riwaz on 12/9/16. 
+ * Created by Riwaz on 12/9/16.
  */
 public class ProbTree {
 

@@ -17,7 +17,7 @@ public class WordPredictor {
 	}
 
 
-    public NGram getNGram(String words) {
+    public static NGram getQuadGram(String words) {
 
 		String filler = "\1";
 

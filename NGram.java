@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * Created by Riwaz on 12/10/16.
  */
@@ -31,5 +33,10 @@ public class NGram {
             }
         }
         return new NGram(words);
+    }
+
+    @Override
+    public String toString() {
+        return Arrays.toString(words);
     }
 }
