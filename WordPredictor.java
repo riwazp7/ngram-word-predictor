@@ -36,10 +36,8 @@ public class WordPredictor {
 
 	public static void main(String[] args) {
 		try {
-			WordPredictor predictor = new WordPredictor(new String[]{"test.txt"});
-			String[] words = new String[]{NGram.BLANK, NGram.BLANK, NGram.BLANK, "the"};
-			NGram testNgram = new NGram(words);
-			System.out.println(predictor.getPrediction(testNgram));
+			WordPredictor predictor = new WordPredictor(new String[]{"fixed.txt"});
+			System.out.println(predictor.getPrediction(NGram.getQuadGram("Until No one can")));
 		} catch (FileNotFoundException e) {
 			System.out.println("File Not Found");
 		}

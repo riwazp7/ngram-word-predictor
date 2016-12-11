@@ -8,7 +8,7 @@ import java.util.List;
 public class ProbTree {
 
     private final int MAX_LEVEL = 4;
-    public static final int NO_OF_SUGGESTION = 4;
+    public static final int NO_OF_SUGGESTION = 6;
 
     Node root;
 

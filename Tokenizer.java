@@ -24,15 +24,15 @@ public class Tokenizer {
 		String[] sentences = corpus.split("\\.");
 
 		for(int i = 0; i < sentences.length; i++) {
-			sentences[i] = sentences[i].trim().toLowerCase();
-			result.addAll(NGram.getNGramsFromSentence(sentences[i]));
+			sentences[i] = sentences[i].trim();
+			result.addAll(NGram.getNGramsFromSentence(sentences[i].toLowerCase()));
 		}
 		return result;
 	}
 
 	// TEST
     public static void main(String[] args) throws FileNotFoundException {
-		LinkedList<NGram> gram = Tokenizer.tokenize("test.txt");
+		LinkedList<NGram> gram = Tokenizer.tokenize("small_test.txt");
 		for(int i = 0; i < gram.size(); i++) {
 			NGram p = gram.get(i);
 			System.out.println(p);

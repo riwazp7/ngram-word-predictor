@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class NGram {
     public static final String BLANK = "ICED_TEA";
-    private int N;
+    public int N;
     private String[] words;
 
     public NGram(String[] words) {
@@ -38,7 +38,7 @@ public class NGram {
     }
 
     public static NGram getQuadGram(String words) {
-
+        words = words.toLowerCase();
         String filler = NGram.BLANK;
 
         words = words.replace(".", "");
