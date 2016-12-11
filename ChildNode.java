@@ -5,11 +5,7 @@ import java.util.List;
  * A ChildNode object
  **/
 
-public class ChildNode extends Node implements Comparable<ChildNode> {
-
-
-    // This node's word frequency.
-    private Integer count = 0;
+public class ChildNode extends Node {
 
     int level;
 
@@ -37,11 +33,6 @@ public class ChildNode extends Node implements Comparable<ChildNode> {
                 sortArrayList();
             }
         }
-    }
-
-    @Override
-    public int compareTo(ChildNode n) {
-        return n.count.compareTo(this.count);
     }
 
     @Override

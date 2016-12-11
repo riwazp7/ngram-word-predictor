@@ -20,7 +20,6 @@ public class WordPredictor {
 				tree.add(p);
 			}
 		}
-		System.out.println(tree);
 	}
 
 	public List<String> getPrediction(NGram n) {
@@ -30,7 +29,7 @@ public class WordPredictor {
 
     public static NGram getQuadGram(String words) {
 
-		String filler = "\1";
+		String filler = NGram.BLANK;
 
 		words = words.replace(".", "");
 		// store words in string array to easily determine number of words
@@ -61,7 +60,7 @@ public class WordPredictor {
 	public static void main(String[] args) {
 		try {
 			WordPredictor predictor = new WordPredictor(new String[]{"test.txt"});
-			String[] words = new String[]{"the", "horse", "jumped", "over"};
+			String[] words = new String[]{NGram.BLANK, NGram.BLANK, NGram.BLANK, "the"};
 			NGram testNgram = new NGram(words);
 			System.out.println(predictor.getPrediction(testNgram));
 		} catch (FileNotFoundException e) {

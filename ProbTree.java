@@ -1,6 +1,5 @@
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -26,7 +25,7 @@ public class ProbTree {
             throw new RuntimeException("Cannot predict for " + n + "when MAX_LEVEL is " + MAX_LEVEL);
         }
         List<String> result = new ArrayList<>();
-        while (n.getWord(n.N - 1) != NGram.BLANK) {
+        while (!n.getWord(n.N - 1).equals(NGram.BLANK)) {
             List<String> prediction = root.predict(n);
             if (prediction != null) {
                 for (String word : prediction) {

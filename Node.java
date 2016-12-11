@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -6,16 +7,18 @@ import java.util.List;
  * A Node object is going to have a parent, word and frequency
  **/
 
-public class Node {
+public class Node implements Comparable<Node> {
 
     // Max updates to the ArrayList before we sort it.
-    protected final int SORT_THRESHOLD = 5;
+    protected final int SORT_THRESHOLD = 0;
 
     ArrayList<Node> children = new ArrayList<>();
     HashMap<String, Integer> childrenIndex = new HashMap<>();
 
     protected final int MAX_LEVEL;
 
+    // This node's word frequency.
+    protected Integer count = 0;
     protected String word;
 
 
@@ -29,6 +32,10 @@ public class Node {
     private final int level = -1;
 
     protected void sortArrayList() {
+        Collections.sort(children);
+        for (int i = 0; i < children.size(); i++) {
+            childrenIndex.put(children.get(i).getWord(), i);
+        }
         updates = 0;
     }
 
@@ -67,6 +74,11 @@ public class Node {
             result += (node.toString() + ", ");
         }
         return result + children.get(children.size() - 1) + ")";
+    }
+
+    @Override
+    public int compareTo(Node n) {
+        return n.count.compareTo(this.count);
     }
 
 }
