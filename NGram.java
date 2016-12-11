@@ -6,6 +6,11 @@ public class NGram {
     protected int N;
     protected String[] words;
 
+    public NGram(String[] words) {
+        this.words = words;
+        this.N = words.length;
+    }
+
     public String getWord(int i) {
         if (i >= N) {
             throw new RuntimeException(N + "-gram has no " + i + "th element.");

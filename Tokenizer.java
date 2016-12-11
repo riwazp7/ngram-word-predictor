@@ -10,11 +10,11 @@ import java.util.Scanner;
 
 public class Tokenizer {
     
-    public static LinkedList<PentaGram> tokenize(String filename)
+    public static LinkedList<NGram> tokenize(String filename)
 	          throws FileNotFoundException {
 	
 		Scanner fileScanner = new Scanner(new File(filename));
-		LinkedList<PentaGram> result = new LinkedList<>();
+		LinkedList<NGram> result = new LinkedList<>();
 		String corpus = "";
 
 		//store all strings in result list
@@ -26,23 +26,23 @@ public class Tokenizer {
 		String filler = "\1";
 
 		for(int i = 0; i < sentences.length; i++){
-			PentaGram p;
+			NGram p;
 	    	String[] words = sentences[i].split(" ");
 	    	for(int j = 0; j < words.length; j++){
 				if( j == 0 ){
 	    			if(words[j].equals("")) {
-						p = new PentaGram(new String[] {filler,filler,filler,filler,words[++j]});
+						p = new NGram(new String[] {filler,filler,filler,filler,words[++j]});
 					} else {
-						p = new PentaGram(new String[]{filler, filler, filler, filler, words[j]});
+						p = new NGram(new String[]{filler, filler, filler, filler, words[j]});
 					}
 				} else if ( j == 1 ) {
-		    		p = new PentaGram(new String[] {filler,filler,filler,words[j-1],words[j]});
+		    		p = new NGram(new String[] {filler,filler,filler,words[j-1],words[j]});
 				} else if ( j == 2 ) {
-		    		p = new PentaGram(new String[] {filler,filler,words[j-2],words[j-1],words[j]});
+		    		p = new NGram(new String[] {filler,filler,words[j-2],words[j-1],words[j]});
 				} else if ( j == 3 ){
-		    		p = new PentaGram(new String[] {filler,words[j-3],words[j-2],words[j-1],words[j]});
+		    		p = new NGram(new String[] {filler,words[j-3],words[j-2],words[j-1],words[j]});
 				} else {
-					p = new PentaGram(new String[]{words[j - 4], words[j - 3], words[j - 2], words[j - 1], words[j]});
+					p = new NGram(new String[]{words[j - 4], words[j - 3], words[j - 2], words[j - 1], words[j]});
 				}
 				result.add(p);
 	    	}
@@ -52,10 +52,10 @@ public class Tokenizer {
     
     public static void main(String[] args) throws FileNotFoundException {
 	// TEST
-		LinkedList<PentaGram> gram = Tokenizer.tokenize("test.txt");
+		LinkedList<NGram> gram = Tokenizer.tokenize("test.txt");
 		for(int i = 0; i < gram.size(); i++) {
-			PentaGram p = gram.get(i);
-			p.printWords();
+			NGram p = gram.get(i);
+			System.out.println(p);
 		}
 
 	}

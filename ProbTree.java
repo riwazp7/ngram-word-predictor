@@ -17,7 +17,7 @@ public class ProbTree {
         root = new Node(MAX_LEVEL);
     }
 
-    public void add(PentaGram p) {
+    public void add(NGram p) {
         root.add(p);
     }
 
@@ -48,17 +48,17 @@ public class ProbTree {
         String[] files = new String[]{"test.txt"};
 
         WordPredictor grams = new WordPredictor(files);
-        ArrayList<LinkedList<PentaGram>> pentaGrams = grams.pentaGrams;
+        ArrayList<LinkedList<NGram>> NGrams = grams.nGrams;
 
-        for(LinkedList<PentaGram> penta : pentaGrams){
-            for(PentaGram p : penta){
+        for(LinkedList<NGram> penta : NGrams){
+            for(NGram p : penta){
                 tree.add(p);
             }
         }
-        tree.add(new PentaGram(new String[] {"the","big","brown","fox","jumped"}));
-        tree.add(new PentaGram(new String[] {"the","big","brown","fox","jumped"}));
-        tree.add(new PentaGram(new String[] {"the","big","man","is","nice"}));
-        tree.add(new PentaGram(new String[]{"a","big","man","is","nice"}));
+        tree.add(new NGram(new String[] {"the","big","brown","fox","jumped"}));
+        tree.add(new NGram(new String[] {"the","big","brown","fox","jumped"}));
+        tree.add(new NGram(new String[] {"the","big","man","is","nice"}));
+        tree.add(new NGram(new String[]{"a","big","man","is","nice"}));
         System.out.println(tree);
     }
 
