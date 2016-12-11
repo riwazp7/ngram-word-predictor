@@ -1,12 +1,13 @@
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class WordPredictor {
 
-	ArrayList<LinkedList<NGram>> nGrams;
-	ProbTree tree = new ProbTree();
+	private ArrayList<LinkedList<NGram>> nGrams;
+	private ProbTree tree = new ProbTree();
 
 	public WordPredictor(String[] fileNames) throws FileNotFoundException {
 		nGrams = new ArrayList<>();
@@ -19,6 +20,10 @@ public class WordPredictor {
 				tree.add(p);
 			}
 		}
+	}
+
+	public List<String> getPrediction(NGram n) {
+		return tree.predictNextWords(n);
 	}
 
 
