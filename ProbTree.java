@@ -35,8 +35,10 @@ public class ProbTree {
             List<String> prediction = roots[n.N - 1].predict(n);
             if (prediction != null) {
                 for (String word : prediction) {
-                    result.add(word);
-                    if (result.size() > NO_OF_SUGGESTION) return result;
+                    if (!result.contains(word)) {
+                        result.add(word);
+                        if (result.size() >= NO_OF_SUGGESTION) return result;
+                    }
                 }
             }
             n = NGram.getOneSmallerNgram(n);

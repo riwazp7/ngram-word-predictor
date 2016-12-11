@@ -32,7 +32,7 @@ public class ChildNode extends Node {
                 childrenIndex.put(nextWord, children.size() - 1);
             }
             updates++;
-            if (updates > SORT_THRESHOLD) {
+            if (updates > SORT_THRESHOLD_FACTOR / (level + 2) / (level + 2)) {
                 sortArrayList();
             }
         }
