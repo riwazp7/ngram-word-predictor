@@ -22,6 +22,10 @@ public class NGram {
         return words[i];
     }
 
+    public String[] getWords() {
+        return words;
+    }
+
     // Creates a new copy of Ngram n and changes the first non-blank String to blank.
     public static NGram insertBlank(NGram n) {
         String[] words = new String[n.N];
@@ -87,6 +91,11 @@ public class NGram {
             result.add(n);
         }
         return result;
+    }
+
+    public static NGram getOneSmallerNgram(NGram n) {
+        if (n.N == 1)return null;
+        else return new NGram(Arrays.copyOfRange(n.getWords(), 1, n.getWords().length));
     }
 
     @Override
