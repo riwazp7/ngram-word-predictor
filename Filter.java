@@ -13,14 +13,14 @@ public class Filter {
     HashSet<String> words;
 
     public void Filter(String filename) 
-	throws FileNotFoundException {
-	// Create the HashSet that will store all words
-	words = new HashSet<String>();
+		throws FileNotFoundException {
+		// Create the HashSet that will store all words
+		words = new HashSet<String>();
 	
-	Scanner fileScanner = new Scanner(new File(filename));
-	while(fileScanner.hasNextLine()){
-	    words.add(fileScanner.nextLine());
-	}
+		Scanner fileScanner = new Scanner(new File(filename));
+		while(fileScanner.hasNextLine()){
+	    	words.add(fileScanner.nextLine());
+		}
 
     }
 
