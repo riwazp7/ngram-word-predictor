@@ -57,7 +57,7 @@ public class ChildNode extends Node implements Comparable<ChildNode> {
 
     @Override
     public List<String> predict(NGram n) {
-        if (this.level - 1 == MAX_LEVEL) {
+        if (this.level + 1 == MAX_LEVEL) {
             List<String> result = new ArrayList<>();
             for (int i = 0; i < ProbTree.NO_OF_SUGGESTION && i < children.size(); i++) {
                 result.add(children.get(i).getWord());
