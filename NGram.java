@@ -1,12 +1,14 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Riwaz on 12/10/16.
  */
 public class NGram {
     public static final String BLANK = "ICED_TEA";
-    protected int N;
-    protected String[] words;
+    private int N;
+    private String[] words;
 
     public NGram(String[] words) {
         this.words = words;
@@ -33,6 +35,58 @@ public class NGram {
             }
         }
         return new NGram(words);
+    }
+
+    public static NGram getQuadGram(String words) {
+
+        String filler = NGram.BLANK;
+
+        words = words.replace(".", "");
+        // store words in string array to easily determine number of words
+        String[] splitWords = words.split(" ");
+
+        NGram p = null;
+        //determine if there are currently more than 4 words typed in
+        int numWords = splitWords.length;
+        if (numWords < 4) {
+            if (numWords == 0) {
+                p = null;
+            } else if (numWords == 1) {
+                p = new NGram(new String[]{filler, filler, filler, splitWords[0]});
+            } else if (numWords == 2) {
+                p = new NGram(new String[]{filler, filler, splitWords[0], splitWords[1]});
+            } else if (numWords == 3) {
+                p = new NGram(new String[]{filler, splitWords[0], splitWords[1], splitWords[2]});
+            }
+        } else {
+            //just grab the last four words
+            p = new NGram(new String[]{splitWords[numWords - 4], splitWords[numWords - 3],
+                    splitWords[numWords - 2], splitWords[numWords - 1]});
+        }
+
+        return p;
+    }
+
+    public static List<NGram> getNGramsFromSentence(String sentence) {
+        String filler = NGram.BLANK;
+        String[] words = sentence.split(" ");
+        NGram n;
+        List<NGram> result = new ArrayList<>();
+        for(int j = 0; j < words.length; j++){
+            if( j == 0 ){
+                n = new NGram(new String[]{filler, filler, filler, filler, words[j]});
+            } else if ( j == 1 ) {
+                n = new NGram(new String[] {filler,filler,filler,words[j-1],words[j]});
+            } else if ( j == 2 ) {
+                n = new NGram(new String[] {filler,filler,words[j-2],words[j-1],words[j]});
+            } else if ( j == 3 ){
+                n = new NGram(new String[] {filler,words[j-3],words[j-2],words[j-1],words[j]});
+            } else {
+                n = new NGram(new String[]{words[j - 4], words[j - 3], words[j - 2], words[j - 1], words[j]});
+            }
+            result.add(n);
+        }
+        return result;
     }
 
     @Override

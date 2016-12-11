@@ -26,35 +26,12 @@ public class WordPredictor {
 		return tree.predictNextWords(n);
 	}
 
+	public List<String> getPrediction(String input) {
+		return getPrediction(NGram.getQuadGram(input));
+	}
 
-    public static NGram getQuadGram(String words) {
-
-		String filler = NGram.BLANK;
-
-		words = words.replace(".", "");
-		// store words in string array to easily determine number of words
-		String[] splitWords = words.split(" ");
-
-		NGram p = null;
-		//determine if there are currently more than 4 words typed in
-		int numWords = splitWords.length;
-		if (numWords < 4) {
-			if (numWords == 0) {
-				p = null;
-			} else if (numWords == 1) {
-				p = new NGram(new String[]{filler, filler, filler, splitWords[0]});
-			} else if (numWords == 2) {
-				p = new NGram(new String[]{filler, filler, splitWords[0], splitWords[1]});
-			} else if (numWords == 3) {
-				p = new NGram(new String[]{filler, splitWords[0], splitWords[1], splitWords[2]});
-			}
-		} else {
-			//just grab the last four words
-			p = new NGram(new String[]{splitWords[numWords - 4], splitWords[numWords - 3],
-						splitWords[numWords - 2], splitWords[numWords - 1]});
-		}
-
-		return p;
+	public void addNgram(NGram n) {
+		tree.add(n);
 	}
 
 	public static void main(String[] args) {
@@ -64,7 +41,7 @@ public class WordPredictor {
 			NGram testNgram = new NGram(words);
 			System.out.println(predictor.getPrediction(testNgram));
 		} catch (FileNotFoundException e) {
-			System.out.println("Not File Found");
+			System.out.println("File Not Found");
 		}
 	}
 }
