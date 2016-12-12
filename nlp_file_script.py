@@ -3,14 +3,11 @@ Python Script for NLP final project
 Basically we only wants lines to end with periods.
 '''
 
-import re
-
 with open('bio_of_rabbit.txt', 'r') as rf:
     with open('fixed.txt', 'w') as wf:
 
         for line in rf:
-            #line = line.rstrip('\n')
-            # lines we want
+
             if line.endswith(".\n"):
                 wf.write(line)
 
