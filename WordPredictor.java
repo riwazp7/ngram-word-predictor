@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,11 +10,13 @@ public class WordPredictor {
 
 	private ProbTree tree;
 
+	private HashMap<String, Integer> words = new HashMap<>();
+
 	public WordPredictor(String[] fileNames) throws FileNotFoundException {
 		this.tree = new ProbTree(new Filter(CURSE_WORDS));
 		ArrayList<LinkedList<NGram>> nGrams = new ArrayList<>();
 		for(String file : fileNames){
-			LinkedList<NGram> NGram = Tokenizer.tokenize(file);
+			LinkedList<NGram> NGram = Tokenizer.tokenizeToNgrams(file);
 			nGrams.add(NGram);
 		}
 

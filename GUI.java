@@ -28,14 +28,14 @@ public class GUI extends JFrame {
     private List<String> predict;
 
     public GUI() throws FileNotFoundException {
-    	predictor = new WordPredictor(files);
-
 		createView();
 		setTitle("N-Gram Word Predictor");
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setSize(1000,200); // of the window
 		setLocationRelativeTo(null);
 		setResizable(false);
+
+		predictor = new WordPredictor(files);
     }
 
     private void createView() {
