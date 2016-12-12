@@ -73,6 +73,25 @@ public class Node implements Comparable<Node> {
         }
     }
 
+    public void initialAdd(NGram p) {
+        String nextWord = p.getWord(level + 1);
+        if (childrenIndex.containsKey(nextWord)) {
+            children.get(childrenIndex.get(nextWord)).add(p);
+        } else {
+            ChildNode child = new ChildNode(nextWord, level + 1, MAX_LEVEL);
+            children.add(child);
+            child.initialAdd(p);
+            childrenIndex.put(nextWord, children.size() - 1);
+        }
+    }
+
+    public void initialSort() {
+        sortArrayList();
+        for (Node n : children) {
+            n.initialSort();
+        }
+    }
+
     public List<String> predict(NGram n) {
         if (childrenIndex.containsKey(n.getWord(level + 1))) {
             return children.get(childrenIndex.get(n.getWord(level + 1))).predict(n);

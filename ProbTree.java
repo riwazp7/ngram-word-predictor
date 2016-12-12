@@ -32,6 +32,19 @@ public class ProbTree {
         }
     }
 
+    public void initialAdd(NGram n) {
+        for (int i = roots.length - 1; i >= 0; i--) {
+            roots[i].initialAdd(n);
+            n = NGram.getOneSmallerNgram(n);
+        }
+    }
+
+    public void initialSort() {
+        for (int i = roots.length - 1; i >= 0; i--) {
+            roots[i].initialSort();
+        }
+    }
+
     public List<String> predictNextWords(NGram n) {
         if (n.N > MAX_LEVEL) {
             throw new RuntimeException("Cannot predict for " + n + "when MAX_LEVEL is " + MAX_LEVEL);

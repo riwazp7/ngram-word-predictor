@@ -37,6 +37,33 @@ public class ChildNode extends Node {
         }
     }
 
+    @Override
+    public void initialAdd(NGram p) {
+        if (p.N != MAX_LEVEL + 1) {
+            throw new RuntimeException("Cannot add " + p.N + "-gram to a tree with MAX_LEVEL " + MAX_LEVEL);
+        }
+        count += 1;
+        if (level < MAX_LEVEL) {
+            String nextWord = p.getWord(level + 1);
+            if (childrenIndex.containsKey(nextWord)) {
+                children.get(childrenIndex.get(nextWord)).add(p);
+            } else {
+                ChildNode child = new ChildNode(nextWord, level + 1, MAX_LEVEL);
+                children.add(child);
+                child.initialAdd(p);
+                childrenIndex.put(nextWord, children.size() - 1);
+            }
+        }
+    }
+
+    @Override
+    public void initialSort() {
+        sortArrayList();
+        for (Node n : children) {
+            n.initialSort();
+        }
+    }
+
     public String toString(String soFar) {
         soFar = soFar + word + ": " + count + " ";
         if (children.isEmpty()) return soFar + "\n";

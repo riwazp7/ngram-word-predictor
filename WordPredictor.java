@@ -31,9 +31,11 @@ public class WordPredictor {
 
 		for(LinkedList<NGram> penta : nGrams){
 			for(NGram p : penta){
-				tree.add(p);
+				tree.initialAdd(p);
 			}
 		}
+
+		tree.initialSort();
 
 		Collections.sort(wordCounts);
 		for (int i = 0; i < wordCounts.size(); i++) {
@@ -99,7 +101,7 @@ public class WordPredictor {
 
 	public static void main(String[] args) {
 		try {
-			WordPredictor predictor = new WordPredictor(new String[]{"fixed.txt"});
+			WordPredictor predictor = new WordPredictor(new String[]{"new_corpus.txt"});
 			System.out.println(predictor.getPrediction("the"));
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found");
