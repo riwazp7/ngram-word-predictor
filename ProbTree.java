@@ -41,7 +41,7 @@ public class ProbTree {
             List<String> prediction = roots[n.N - 1].predict(n);
             if (prediction != null) {
                 for (String word : prediction) {
-                    if (!word.isEmpty() && !result.contains(word)) {
+                    if (!word.isEmpty() && !result.contains(word) && !filter.contains(word)) {
                         result.add(word);
                         if (result.size() >= NO_OF_SUGGESTION) return result;
                     }
