@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,7 +9,7 @@ import java.util.List;
 public class Node implements Comparable<Node> {
 
     // Max updates to the ArrayList before we sort it.
-    protected final int SORT_THRESHOLD_FACTOR = 100;
+    protected final int SORT_THRESHOLD_FACTOR = 50;
 
     ArrayList<Node> children = new ArrayList<>();
     HashMap<String, Integer> childrenIndex = new HashMap<>();
@@ -29,7 +28,7 @@ public class Node implements Comparable<Node> {
     // The number of updates to the ArrayList since we last sorted it.
     protected int updates = 0;
 
-    private final int level = -1;
+    protected int level = -1;
 
     protected void sortArrayList() {
 
@@ -38,7 +37,7 @@ public class Node implements Comparable<Node> {
         while (noSorted < children.size()) {
             Node temp = children.get(noSorted);
             for (index = noSorted; index > 0; index--) {
-                if (temp.compareTo(children.get(index - 1)) > 0) {
+                if (temp.compareTo(children.get(index - 1)) < 0) {
                     children.set(index, children.get(index - 1));
                     childrenIndex.put(children.get(index - 1).getWord(), index);
                 } else {

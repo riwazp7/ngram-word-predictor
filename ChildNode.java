@@ -7,7 +7,6 @@ import java.util.List;
 
 public class ChildNode extends Node {
 
-    int level;
 
     public ChildNode(String word, int level, int MAX_LEVEL) {
         super(MAX_LEVEL);

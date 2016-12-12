@@ -8,7 +8,7 @@ import java.util.List;
 public class ProbTree {
 
     private final int MAX_LEVEL = 4;
-    public static final int NO_OF_SUGGESTION = 4;
+    public static final int NO_OF_SUGGESTION = 5;
 
     private Node[] roots;
 
@@ -60,7 +60,6 @@ public class ProbTree {
         ProbTree tree = new ProbTree();
 
         tree.add(new NGram(new String[] {"the","big","brown","fox","jumped"}));
-        //tree.add(new NGram(new String[] {"the","big","brown","fox","jumped"}));
         tree.add(new NGram(new String[] {"the","big","man","is","nice"}));
         tree.add(new NGram(new String[] {"a","big","man","is","nice"}));
         System.out.println(tree);
