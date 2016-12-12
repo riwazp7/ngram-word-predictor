@@ -1,6 +1,7 @@
 '''
 Python Script for NLP final project
-Basically we only wants lines to end with periods.
+Basically we only wants lines to end with periods,
+and to ignore punctuation that can alter NGram probabilities.
 '''
 
 with open('bio_of_rabbit.txt', 'r') as rf:
