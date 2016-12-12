@@ -14,7 +14,6 @@ with open('bio_of_rabbit.txt', 'r') as rf:
             line = line.replace(",","");
             line = line.replace("?",".");
             line = line.replace("!",".");
-            line = line.replace(":",".");
             line = line.replace(";","");
             line = line.replace("[","");
             line = line.replace("]","");

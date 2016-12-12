@@ -40,7 +40,7 @@ public class Tokenizer {
 
 	// TEST
     public static void main(String[] args) throws FileNotFoundException {
-		LinkedList<NGram> gram = Tokenizer.tokenizeToNgrams("small_test.txt");
+		LinkedList<NGram> gram = Tokenizer.tokenizeToNgrams("fixed.txt");
 		for(int i = 0; i < gram.size(); i++) {
 			NGram p = gram.get(i);
 			System.out.println(p);
