@@ -1,90 +1,119 @@
 import javax.swing.*;
-import java.awt.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GUI extends JFrame {
 
+	// where the user will type their input
     private JTextField userInput;
-    //private JLabel enterText;
 
-    private JButton word1;
-    private JButton word2;
-    private JButton word3;
-    private JButton word4;
-    private JButton word5;
+    // visual display for user
+    private JPanel panel;
 
-    public GUI() {
+    public static final long serialVersionUID = 1L;
+
+    // used fo
+	List<JButton> buttons = new ArrayList<JButton>();
+
+    private JButton endSentence;
+
+    private String [] files = new String[]{"fixed.txt"};
+    private WordPredictor predictor;
+    private List<String> predict;
+
+    public GUI() throws FileNotFoundException {
+    	predictor = new WordPredictor(files);
+
+    	endSentence = new JButton("Done");
+
 		createView();
 		setTitle("N-Gram Word Predictor");
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setSize(1000,200); // of the window
 		setLocationRelativeTo(null);
 		setResizable(false);
     }
 
     private void createView() {
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		getContentPane().add(panel);
 
 		JLabel enterText = new JLabel("Please enter input: ");
-		panel.add(enterText);
-
-		enterText = new JLabel();
 		enterText.setPreferredSize(new Dimension(100,30));
 		panel.add(enterText);
 
 		userInput = new JTextField();
-		userInput.setPreferredSize(new Dimension(750,30));
+		userInput.getDocument().addDocumentListener(new DocumentListener() {
+			@Override
+			public void insertUpdate(DocumentEvent e) { buttons(); }
+
+			@Override
+			public void removeUpdate(DocumentEvent e) { buttons(); }
+
+			@Override
+			public void changedUpdate(DocumentEvent e) { buttons(); }
+
+			public void buttons(){
+				String curInput = userInput.getText();
+				predict = predictor.getPrediction(curInput);
+				int j = 0;
+				while(j < predict.size()) {
+					JButton jButton = buttons.get(j);
+					jButton.setText(predict.get(j++));
+				}
+			}
+		});
+
+		userInput.setPreferredSize(new Dimension(850,30));
 		panel.add(userInput);
 
-		word1 = new JButton("click");
-		// Perform this action every time the button is clicked
-		word1.addActionListener(new buttonLabelActionListener());
-		panel.add(word1);
+		for(int i = 0; i < 5; i++) {
+			JButton jButton = new JButton(" ");
+			jButton.addActionListener(new buttonLabelActionListener());
+			buttons.add(jButton);
+			panel.add(jButton);
+		}
 
-		word2 = new JButton("click");
-		// Perform this action every time the button is clicked
-		word2.addActionListener(new buttonLabelActionListener());
-		panel.add(word2);
-
-		word3 = new JButton("click");
-		// Perform this action every time the button is clicked
-		word3.addActionListener(new buttonLabelActionListener());
-		panel.add(word3);
-
-		word4 = new JButton("click");
-		// Perform this action every time the button is clicked
-		word4.addActionListener(new buttonLabelActionListener());
-		panel.add(word4);
-
-		word5 = new JButton("click");
-		// Perform this action every time the button is clicked
-		word5.addActionListener(new buttonLabelActionListener());
-		panel.add(word5);
-
-	
+		panel.add(endSentence);
+		endSentence.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String text = userInput.getText();
+				predictor.addSentence(text);
+				userInput.setText("");
+			}
+		});
 	}
-    
+
     public static void main(String [] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 		    public void run(){
-		    new GUI().setVisible(true);
-		}
+				try {
+					new GUI().setVisible(true);
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+			}
 	    });
     }
 
     private class buttonLabelActionListener implements ActionListener {
-		// This method is called every time the button is clicked
+		// This method is called every time a word button is clicked
 		@Override
 	    public void actionPerformed(ActionEvent e) {
-	    // add the text to the JTextField
-	    // potentially change the text of the label to another predicted word
-	    ((JButton) e.getSource()).setText("go");
-	    String curInput = userInput.getText();
-	    userInput.setText(curInput + " yes");
+	    	String curInput = userInput.getText();
+	    	if(userInput.getText().endsWith(" ")){
+				userInput.setText(curInput + ((JButton) e.getSource()).getText());
+			} else {
+				userInput.setText(curInput + " " + ((JButton) e.getSource()).getText());
+			}
 		}
     }
-    
 }
