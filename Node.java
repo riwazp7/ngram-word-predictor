@@ -20,15 +20,14 @@ public class Node implements Comparable<Node> {
     protected Integer count = 0;
     protected String word;
 
-
-    public Node(int MAX_LEVEL) {
-        this.MAX_LEVEL = MAX_LEVEL;
-    }
-
     // The number of updates to the ArrayList since we last sorted it.
     protected int updates = 0;
 
     protected int level = -1;
+
+    public Node(int MAX_LEVEL) {
+        this.MAX_LEVEL = MAX_LEVEL;
+    }
 
     protected void sortArrayList() {
 
