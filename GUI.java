@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class GUI extends JFrame {
 
 	// where the user will type their input
@@ -21,10 +22,15 @@ public class GUI extends JFrame {
     // used to suggest words to the user
 	List<JButton> buttons = new ArrayList<>();
 
+	// user should push this button when they have completed a sentence
     private JButton endSentence = new JButton("Done");
 
+	// corpus we will use to predict words
     private String [] files = Params.TRAINING_FILES;
+
     private WordPredictor predictor;
+
+    // store predicted words to suggest
     private List<String> predict;
 
     public GUI() throws FileNotFoundException {
@@ -35,11 +41,12 @@ public class GUI extends JFrame {
 		setSize(1000,200); // of the window
 		setLocationRelativeTo(null);
 		setResizable(false);
-
-		//predictor = new WordPredictor(files);
     }
 
-    private void createView() {
+	/**
+	 * This method does all the updating and visual work for the user.
+	 **/
+	private void createView() {
 		panel = new JPanel();
 		getContentPane().add(panel);
 
@@ -47,6 +54,13 @@ public class GUI extends JFrame {
 		enterText.setPreferredSize(new Dimension(100,30));
 		panel.add(enterText);
 
+		/**
+		 * To update predicted words in real-time, we must collect the words
+		 * that are currently entered, and use the text to get predictions
+		 * using NGrams. After we have retrieved the words with the highest
+		 * probability, we update the JButtons so the user has options of words
+		 * to choose from.
+		**/
 		userInput = new JTextField();
 		userInput.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
@@ -72,9 +86,12 @@ public class GUI extends JFrame {
 		userInput.setPreferredSize(new Dimension(850,30));
 		panel.add(userInput);
 
+		/**
+		 * Here is where we change the text of a button to be predicted words
+		 * ranked by NGram probability.
+		**/
 		predict = predictor.getPrediction("");
 		for(int i = 0; i < 5; i++) {
-			//JButton jButton = new JButton(" ");
 			JButton jButton;
 			if(predict.size() > i ) {
 				jButton = new JButton(predict.get(i));
@@ -86,6 +103,10 @@ public class GUI extends JFrame {
 			panel.add(jButton);
 		}
 
+		/**
+		 * Once the user has decided they've written a sentence, we clear the
+		 * text field so they can start over and have new NGram trees.
+		 **/
 		panel.add(endSentence);
 		endSentence.addActionListener(new ActionListener() {
 			@Override
@@ -110,7 +131,13 @@ public class GUI extends JFrame {
 	    });
     }
 
-    private class buttonLabelActionListener implements ActionListener {
+	/**
+	 * This class is called when a button is clicked.
+	 * Once a button is pressed, we retrieve all the text currently inputted
+	 * by the user and store it in a string, add the word to the string, and then
+	 * add the text back into the text field.
+	 **/
+	private class buttonLabelActionListener implements ActionListener {
 		// This method is called every time a word button is clicked
 		@Override
 	    public void actionPerformed(ActionEvent e) {
