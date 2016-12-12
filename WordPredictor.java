@@ -101,7 +101,7 @@ public class WordPredictor {
 
 	public static void main(String[] args) {
 		try {
-			WordPredictor predictor = new WordPredictor(new String[]{"new_corpus.txt"});
+			WordPredictor predictor = new WordPredictor(new String[]{"fixed.txt"});
 			System.out.println(predictor.getPrediction("the"));
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found");
