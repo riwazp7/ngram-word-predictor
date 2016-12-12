@@ -7,6 +7,10 @@ import java.util.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+/**
+ * This class creates a filter from a file of words that we do not
+ * want to predict (or suggest) to the user
+ **/
 
 public class Filter {
     
