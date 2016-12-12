@@ -18,10 +18,10 @@ public class GUI extends JFrame {
 
     public static final long serialVersionUID = 1L;
 
-    // used fo
-	List<JButton> buttons = new ArrayList<JButton>();
+    // used to suggest words to the user
+	List<JButton> buttons = new ArrayList<>();
 
-    private JButton endSentence;
+    private JButton endSentence = new JButton("Done");
 
     private String [] files = new String[]{"fixed.txt"};
     private WordPredictor predictor;
@@ -29,8 +29,6 @@ public class GUI extends JFrame {
 
     public GUI() throws FileNotFoundException {
     	predictor = new WordPredictor(files);
-
-    	endSentence = new JButton("Done");
 
 		createView();
 		setTitle("N-Gram Word Predictor");
@@ -44,7 +42,7 @@ public class GUI extends JFrame {
 		panel = new JPanel();
 		getContentPane().add(panel);
 
-		JLabel enterText = new JLabel("Please enter input: ");
+		JLabel enterText = new JLabel("Type:");
 		enterText.setPreferredSize(new Dimension(100,30));
 		panel.add(enterText);
 
