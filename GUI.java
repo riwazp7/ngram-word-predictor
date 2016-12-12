@@ -28,6 +28,7 @@ public class GUI extends JFrame {
     private List<String> predict;
 
     public GUI() throws FileNotFoundException {
+		predictor = new WordPredictor(files);
 		createView();
 		setTitle("N-Gram Word Predictor");
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -35,7 +36,7 @@ public class GUI extends JFrame {
 		setLocationRelativeTo(null);
 		setResizable(false);
 
-		predictor = new WordPredictor(files);
+		//predictor = new WordPredictor(files);
     }
 
     private void createView() {
@@ -71,8 +72,15 @@ public class GUI extends JFrame {
 		userInput.setPreferredSize(new Dimension(850,30));
 		panel.add(userInput);
 
+		predict = predictor.getPrediction("");
 		for(int i = 0; i < 5; i++) {
-			JButton jButton = new JButton(" ");
+			//JButton jButton = new JButton(" ");
+			JButton jButton;
+			if(predict.size() > i ) {
+				jButton = new JButton(predict.get(i));
+			} else {
+				jButton = new JButton("");
+			}
 			jButton.addActionListener(new buttonLabelActionListener());
 			buttons.add(jButton);
 			panel.add(jButton);
