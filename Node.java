@@ -32,10 +32,30 @@ public class Node implements Comparable<Node> {
     private final int level = -1;
 
     protected void sortArrayList() {
+
+        int noSorted = 1;
+        int index;
+        while (noSorted < children.size()) {
+            Node temp = children.get(noSorted);
+            for (index = noSorted; index > 0; index--) {
+                if (temp.compareTo(children.get(index - 1)) > 0) {
+                    children.set(index, children.get(index - 1));
+                    childrenIndex.put(children.get(index - 1).getWord(), index);
+                } else {
+                    break;
+                }
+            }
+            children.set(index, temp);
+            childrenIndex.put(temp.getWord(), index);
+            noSorted += 1;
+        }
+
+        /*
         Collections.sort(children);
         for (int i = 0; i < children.size(); i++) {
             childrenIndex.put(children.get(i).getWord(), i);
         }
+        */
         updates = 0;
     }
 

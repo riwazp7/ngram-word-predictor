@@ -1,16 +1,15 @@
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
-import java.util.stream.Stream;
 
 public class WordPredictor {
+
+	private static final String CURSE_WORDS = "curseWords.txt";
 
 	private ArrayList<LinkedList<NGram>> nGrams;
 	private ProbTree tree = new ProbTree();
 
-	Filter curseWords = new Filter();
-	HashSet<String> badWords = curseWords.words;
-	String curseWordsFile = "curseWords.txt";
+	Filter curseWordsFilter;
+
 
 	public WordPredictor(String[] fileNames) throws FileNotFoundException {
 
@@ -26,11 +25,7 @@ public class WordPredictor {
 			}
 		}
 
-		Scanner fileScanner = new Scanner(new File(curseWordsFile));
-		while(fileScanner.hasNextLine()){
-			badWords.add(fileScanner.nextLine());
-		}
-
+		this.curseWordsFilter = new Filter(CURSE_WORDS);
 	}
 
 	public List<String> getPrediction(NGram n) {

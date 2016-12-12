@@ -12,23 +12,11 @@ public class Filter {
     
     HashSet<String> words;
 
-<<<<<<< HEAD
-    public void Filter(String filename) 
-		throws FileNotFoundException {
-		// Create the HashSet that will store all words
-		words = new HashSet<String>();
-	
-		Scanner fileScanner = new Scanner(new File(filename));
-		while(fileScanner.hasNextLine()){
-	    	words.add(fileScanner.nextLine());
-		}
-=======
     public Filter(String filename) throws FileNotFoundException {
 		// Create the HashSet that will store all words
 		words = new HashSet<>();
 	
 		Scanner fileScanner = new Scanner(new File(filename));
->>>>>>> d60bc33c2b2db838b1501039801aa57cb6d33c71
 
 		while(fileScanner.hasNextLine()){
 	    	words.add(fileScanner.nextLine());
