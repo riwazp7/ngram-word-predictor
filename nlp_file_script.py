@@ -8,22 +8,27 @@ with open('bio_of_rabbit.txt', 'r') as rf:
 
         for line in rf:
 
+            line = line.replace("(","");
+            line = line.replace(")","");
+            line = line.replace('"',"");
+            line = line.replace(",","");
+            line = line.replace("?",".");
+            line = line.replace("!",".");
+            line = line.replace(":",".");
+            line = line.replace(";","");
+            line = line.replace("[","");
+            line = line.replace("]","");
+            line = line.replace("{","");
+            line = line.replace("}","");
+            line = line.replace("_","");
+            line = line.replace("<","");
+            line = line.replace(">","");
+            line = line.replace("\\","");
+            line = line.replace("\\/","");
+            line = line.replace("~","");
+
             if line.endswith(".\n"):
                 wf.write(line)
-
-            elif line.endswith("?\n"):
-                line = line.rstrip("?\n")
-                line = line + ".\n"
-                wf.write(line)
-
-            elif line.endswith("!\n"):
-                line = line.rstrip("!\n")
-                line = line + ".\n"
-                wf.write(line)
-
-            elif line.endswith(",\n"):
-                line = line.rstrip("\n")
-                wf.write(line+" ")
 
             elif len(line) == 1:
                 wf.write(line.rstrip("\n"))
@@ -31,9 +36,7 @@ with open('bio_of_rabbit.txt', 'r') as rf:
             elif line.endswith("\n"):
                 wf.write(line.rstrip("\n") + " ")
 
-            
             else:
-                #line = line.rstrip(
                 line = line.rstrip("\n")
                 line = line + ".\n"
                 wf.write(line)
