@@ -8,14 +8,13 @@ with open('bio_of_rabbit.txt', 'r') as rf:
 
         for line in rf:
 
-            line = line.replace("-","");
             line = line.replace("(","");
             line = line.replace(")","");
             line = line.replace('"',"");
             line = line.replace(",","");
             line = line.replace("?",".");
             line = line.replace("!",".");
-            line = line.replace(":","");
+            line = line.replace(":",".");
             line = line.replace(";","");
             line = line.replace("[","");
             line = line.replace("]","");
@@ -24,6 +23,9 @@ with open('bio_of_rabbit.txt', 'r') as rf:
             line = line.replace("_","");
             line = line.replace("<","");
             line = line.replace(">","");
+            line = line.replace("\\","");
+            line = line.replace("\\/","");
+            line = line.replace("~","");
 
             if line.endswith(".\n"):
                 wf.write(line)
