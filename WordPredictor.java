@@ -9,11 +9,8 @@ public class WordPredictor {
 
 	private ProbTree tree;
 
-	Filter curseWordsFilter;
-
-
 	public WordPredictor(String[] fileNames) throws FileNotFoundException {
-		this.tree = new ProbTree();
+		this.tree = new ProbTree(new Filter(CURSE_WORDS));
 		ArrayList<LinkedList<NGram>> nGrams = new ArrayList<>();
 		for(String file : fileNames){
 			LinkedList<NGram> NGram = Tokenizer.tokenize(file);
@@ -25,8 +22,6 @@ public class WordPredictor {
 				tree.add(p);
 			}
 		}
-
-		this.curseWordsFilter = new Filter(CURSE_WORDS);
 	}
 
 	public List<String> getPrediction(NGram n) {
@@ -50,7 +45,7 @@ public class WordPredictor {
 
 	public static void main(String[] args) {
 		try {
-			WordPredictor predictor = new WordPredictor(new String[]{"small_test.txt"});
+			WordPredictor predictor = new WordPredictor(new String[]{"fixed.txt"});
 			System.out.println(predictor.getPrediction("the"));
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found");

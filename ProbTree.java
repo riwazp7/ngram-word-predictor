@@ -11,12 +11,18 @@ public class ProbTree {
     public static final int NO_OF_SUGGESTION = 5;
 
     private Node[] roots;
+    private Filter filter;
 
     public ProbTree() {
         roots = new Node[MAX_LEVEL];
         for (int i = 0; i < MAX_LEVEL; i++) {
             roots[i] = new Node(i + 1);
         }
+    }
+
+    public ProbTree(Filter filter) {
+        this();
+        this.filter = filter;
     }
 
     public void add(NGram n) {
