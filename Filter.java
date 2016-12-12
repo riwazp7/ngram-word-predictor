@@ -1,16 +1,13 @@
-/**
- * Reads a file that has every word on its own line. Put all the words in a HashSet
- * There's a wrapper method to determine if a word is in the HashSet
- **/
-
-import java.util.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-
-/**
+/** Filter.java
+ * (c) Julian Vera, Riwaz Poudyal
  * This class creates a filter from a file of words that we do not
  * want to predict (or suggest) to the user
  **/
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.HashSet;
+import java.util.Scanner;
 
 public class Filter {
     

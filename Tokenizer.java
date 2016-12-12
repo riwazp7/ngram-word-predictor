@@ -1,5 +1,5 @@
-/* Tokenizer.java
- * Divides a text file into words.
+/** Tokenizer.java
+ * Divides a text file into words or Ngrams.
  * (c) 2016 Riwaz Poudyal and Julian Vera
  */
 
@@ -17,7 +17,7 @@ public class Tokenizer {
 
 		for(int i = 0; i < sentences.length; i++) {
 			sentences[i] = sentences[i].trim();
-			result.addAll(NGram.getNGramsFromSentence(sentences[i].toLowerCase()));
+			result.addAll(NGram.getPentaGramsFromSentence(sentences[i].toLowerCase()));
 		}
 		return result;
 	}

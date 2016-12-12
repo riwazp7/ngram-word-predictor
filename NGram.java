@@ -1,10 +1,12 @@
+/** Ngram.java
+ * Represents an N-gram. A sequence of words stored in an Array.
+ *  (c) Julian Vera, Riwaz Poudyal 2016
+ */
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by Riwaz on 12/10/16.
- */
 public class NGram {
     public static final String BLANK = Params.BLANK;
     public int N;
@@ -41,6 +43,7 @@ public class NGram {
         return new NGram(words);
     }
 
+    // Creates a QuadGram out of words. Quadgram is the standard query to the ProbTree's predict method.
     public static NGram getQuadGram(String words) {
         words = words.toLowerCase();
         String filler = NGram.BLANK;
@@ -71,7 +74,8 @@ public class NGram {
         return p;
     }
 
-    public static List<NGram> getNGramsFromSentence(String sentence) {
+    // Create all possible N-grams from a given sentence.
+    public static List<NGram> getPentaGramsFromSentence(String sentence) {
         String filler = NGram.BLANK;
         String[] words = sentence.split(" ");
         NGram n;
@@ -93,6 +97,7 @@ public class NGram {
         return result;
     }
 
+    // Get a N-1 gram from a N-gram. Removes the first String from the array (The earliest string of a sequence).
     public static NGram getOneSmallerNgram(NGram n) {
         if (n.N == 1)return null;
         else return new NGram(Arrays.copyOfRange(n.getWords(), 1, n.getWords().length));
@@ -101,5 +106,11 @@ public class NGram {
     @Override
     public String toString() {
         return Arrays.toString(words);
+    }
+
+    // ************ TEST **********
+    public static void main(String[] args) {
+        String sentence = "The quick brown fox jumped over the lazy dog.";
+        System.out.println(NGram.getPentaGramsFromSentence(sentence));
     }
 }

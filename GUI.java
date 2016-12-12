@@ -1,7 +1,7 @@
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
@@ -23,7 +23,7 @@ public class GUI extends JFrame {
 	List<JButton> buttons = new ArrayList<>();
 
 	// user should push this button when they have completed a sentence
-    private JButton endSentence = new JButton("Done");
+    private JButton endSentence = new JButton("Save");
 
 	// corpus we will use to predict words
     private String [] files = Params.TRAINING_FILES;
@@ -38,7 +38,7 @@ public class GUI extends JFrame {
 		createView();
 		setTitle("N-Gram Word Predictor");
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setSize(1000,200); // of the window
+		setSize(1000,110); // of the window
 		setLocationRelativeTo(null);
 		setResizable(false);
     }
@@ -47,10 +47,17 @@ public class GUI extends JFrame {
 	 * This method does all the updating and visual work for the user.
 	 **/
 	private void createView() {
+		endSentence.setBackground(new Color(62, 62, 62));
+		endSentence.setOpaque(true);
+		endSentence.setBorderPainted(false);
+		endSentence.setForeground(Color.WHITE);
+		endSentence.setFont(new Font("SansSerif", Font.BOLD, 18));
+		endSentence.setVerticalAlignment(SwingConstants.BOTTOM);
 		panel = new JPanel();
 		getContentPane().add(panel);
 
-		JLabel enterText = new JLabel("Type:");
+		JLabel enterText = new JLabel("Type Here:");
+		enterText.setFont(new Font("SansSerif", Font.BOLD, 15));
 		enterText.setPreferredSize(new Dimension(100,30));
 		panel.add(enterText);
 
@@ -82,6 +89,12 @@ public class GUI extends JFrame {
 				}
 			}
 		});
+		userInput.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				endSentence.doClick();
+			}
+		});
 
 		userInput.setPreferredSize(new Dimension(850,30));
 		panel.add(userInput);
@@ -98,10 +111,23 @@ public class GUI extends JFrame {
 			} else {
 				jButton = new JButton("");
 			}
+			// snow new Color(255,250,250)
+			jButton.setBackground(new Color(186, 186, 186));
+			jButton.setBorderPainted(false);
+			jButton.setOpaque(true);
+			jButton.setFont(new Font("SansSerif", Font.BOLD, 14));
+			jButton.setVerticalAlignment(SwingConstants.BOTTOM);
 			jButton.addActionListener(new buttonLabelActionListener());
 			buttons.add(jButton);
 			panel.add(jButton);
 		}
+
+		// Some empty space with invisible button
+		JButton empty = new JButton();
+		panel.add(empty);
+		empty.setOpaque(true);
+		empty.setBorderPainted(false);
+
 
 		/**
 		 * Once the user has decided they've written a sentence, we clear the

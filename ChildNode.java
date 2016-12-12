@@ -1,9 +1,10 @@
+/** ChildNode.java
+ *  Represents all nodes not at the top level.
+ *  (c) Riwaz Poudyal, Julian Vera 2016
+ */
+
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * A ChildNode object
- **/
 
 public class ChildNode extends Node {
 
@@ -71,7 +72,6 @@ public class ChildNode extends Node {
         for (Node n : children) {
             result += (n.toString(soFar) + "\n");
         }
-        // Just removing the last "\n" for now
         return result.substring(0,result.length() - 1);
     }
 
@@ -79,7 +79,7 @@ public class ChildNode extends Node {
     public List<String> predict(NGram n) {
         if (this.level + 1 == MAX_LEVEL) {
             List<String> result = new ArrayList<>();
-            for (int i = 0; i < ProbTree.NO_OF_SUGGESTION && i < children.size(); i++) {
+            for (int i = 0; i < ProbTree.NO_OF_SUGGESTIONS && i < children.size(); i++) {
                 result.add(children.get(i).getWord());
             }
             return result;
