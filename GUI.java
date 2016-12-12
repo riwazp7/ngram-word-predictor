@@ -91,7 +91,7 @@ public class GUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String text = userInput.getText();
-				predictor.addSentence(text);
+				predictor.addString(text);
 				userInput.setText("");
 			}
 		});

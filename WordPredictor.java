@@ -61,12 +61,18 @@ public class WordPredictor {
 		return getPrediction(NGram.getQuadGram(input.toLowerCase()));
 	}
 
-	public void addSentence(String sentence) {
-		List<NGram> nGrams = NGram.getNGramsFromSentence(sentence);
-		for (NGram nGram : nGrams) {
-			addNgram(nGram);
+	public void addString(String str) {
+		addSentences(InputProcessor.processInputString(str));
+	}
+
+	public void addSentences(String[] sentences) {
+		for (String sentence : sentences) {
+			List<NGram> nGrams = NGram.getNGramsFromSentence(sentence);
+			for (NGram nGram : nGrams) {
+				addNgram(nGram);
+			}
+			addWords(sentence);
 		}
-		addWords(sentence);
 	}
 
 	private void addWords(String sentence) {
@@ -101,7 +107,7 @@ public class WordPredictor {
 
 	public static void main(String[] args) {
 		try {
-			WordPredictor predictor = new WordPredictor(new String[]{"new_corpus.txt"});
+			WordPredictor predictor = new WordPredictor(new String[]{"fixed.txt"});
 			System.out.println(predictor.getPrediction("the"));
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found");

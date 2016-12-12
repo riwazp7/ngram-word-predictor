@@ -27,4 +27,9 @@ public class WordCount implements Comparable<WordCount> {
         return wc.getCount().compareTo(count);
     }
 
+    @Override
+    public String toString() {
+        return word + ": " + count;
+    }
+
 }
