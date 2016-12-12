@@ -34,7 +34,6 @@ public class WordPredictor {
 				tree.initialAdd(p);
 			}
 		}
-
 		tree.initialSort();
 
 		Collections.sort(wordCounts);
@@ -107,7 +106,7 @@ public class WordPredictor {
 
 	public static void main(String[] args) {
 		try {
-			WordPredictor predictor = new WordPredictor(new String[]{"fixed.txt"});
+			WordPredictor predictor = new WordPredictor(new String[]{"small_test.txt"});
 			System.out.println(predictor.getPrediction("the"));
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found");
