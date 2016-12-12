@@ -47,6 +47,8 @@ public class WordPredictor {
 	}
 
 	public List<String> getPrediction(String input) {
+		if (input == null) return new ArrayList<>();
+		input = input.trim();
 		if (input.isEmpty()) {
 			List<String> result = new ArrayList<>();
 			for (int i = 0; i < 5 && i < wordCounts.size(); i++) {
