@@ -6,7 +6,7 @@ import java.util.List;
  * Created by Riwaz on 12/10/16.
  */
 public class NGram {
-    public static final String BLANK = "ICED_TEA";
+    public static final String BLANK = Params.BLANK;
     public int N;
     private String[] words;
 

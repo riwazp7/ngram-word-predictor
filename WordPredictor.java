@@ -3,7 +3,7 @@ import java.util.*;
 
 public class WordPredictor {
 
-	private static final String CURSE_WORDS = "curseWords.txt";
+	private static final String WORDS_TO_FILTER = Params.WORDS_TO_FILTER;
 
 	private ProbTree tree;
 
@@ -11,7 +11,7 @@ public class WordPredictor {
 	private ArrayList<WordCount> wordCounts = new ArrayList<>();
 
 	public WordPredictor(String[] fileNames) throws FileNotFoundException {
-		this.tree = new ProbTree(new Filter(CURSE_WORDS));
+		this.tree = new ProbTree(new Filter(WORDS_TO_FILTER));
 		ArrayList<LinkedList<NGram>> nGrams = new ArrayList<>();
 		for(String file : fileNames){
 			LinkedList<NGram> NGram = Tokenizer.tokenizeToNgrams(file);
@@ -65,6 +65,7 @@ public class WordPredictor {
 	}
 
 	public void addSentences(String[] sentences) {
+		if (sentences == null || sentences.length == 0) return;
 		for (String sentence : sentences) {
 			List<NGram> nGrams = NGram.getNGramsFromSentence(sentence);
 			for (NGram nGram : nGrams) {

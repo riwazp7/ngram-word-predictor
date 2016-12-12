@@ -3,7 +3,10 @@
  */
 public class Params {
 
-    // create string object from this class
-
+    public static final String[] TRAINING_FILES = new String[] {"fixed.txt"};
+    public static final String BLANK = "\1";
+    public static final String WORDS_TO_FILTER = "curseWords.txt";
+    public static final int SORT_THRESHOLD_FACTOR = 10;
+    public static final int NO_OF_SUGGESTIONS = 5;
 
 }

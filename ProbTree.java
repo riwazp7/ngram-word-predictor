@@ -7,8 +7,9 @@ import java.util.List;
  */
 public class ProbTree {
 
+    public static final int NO_OF_SUGGESTION = Params.NO_OF_SUGGESTIONS;
+
     private final int MAX_LEVEL = 4;
-    public static final int NO_OF_SUGGESTION = 5;
 
     private Node[] roots;
     private Filter filter;

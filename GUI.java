@@ -23,7 +23,7 @@ public class GUI extends JFrame {
 
     private JButton endSentence = new JButton("Done");
 
-    private String [] files = new String[]{"fixed.txt"};
+    private String [] files = Params.TRAINING_FILES;
     private WordPredictor predictor;
     private List<String> predict;
 
