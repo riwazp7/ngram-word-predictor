@@ -110,7 +110,7 @@ public class NGram {
 
     // ************ TEST **********
     public static void main(String[] args) {
-        String sentence = "The quick brown fox jumped over the lazy dog.";
+        String sentence = "this is an nlp project";
         System.out.println(NGram.getPentaGramsFromSentence(sentence));
     }
 }

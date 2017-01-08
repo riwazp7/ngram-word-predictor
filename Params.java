@@ -8,7 +8,7 @@ public class Params {
     public static final String[] TRAINING_FILES = new String[] {"empty.txt"};
 
     // Unprintable String that represents non-existent parts of an N-gram.
-    public static final String BLANK = "\1";
+    public static final String BLANK = "BLANK";
 
     // File with words to filter.
     public static final String WORDS_TO_FILTER = "curseWords.txt";

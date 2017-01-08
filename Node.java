@@ -28,35 +28,11 @@ public class Node implements Comparable<Node> {
     protected Integer count = 0;
     protected String word;
 
-    // The number of updates to the ArrayList since we last sorted it.
-    protected int updates = 0;
-
     // This node's level. -1 for top level node.
     protected int level = -1;
 
     public Node(int MAX_LEVEL) {
         this.MAX_LEVEL = MAX_LEVEL;
-    }
-
-    // Insertion sort array list.
-    protected void sortArrayList() {
-        int noSorted = 1;
-        int index;
-        while (noSorted < children.size()) {
-            Node temp = children.get(noSorted);
-            for (index = noSorted; index > 0; index--) {
-                if (temp.compareTo(children.get(index - 1)) < 0) {
-                    children.set(index, children.get(index - 1));
-                    childrenIndex.put(children.get(index - 1).getWord(), index);
-                } else {
-                    break;
-                }
-            }
-            children.set(index, temp);
-            childrenIndex.put(temp.getWord(), index);
-            noSorted += 1;
-        }
-        updates = 0;
     }
 
     public void add(NGram p) {
@@ -68,10 +44,6 @@ public class Node implements Comparable<Node> {
             children.add(child);
             child.add(p);
             childrenIndex.put(nextWord, children.size() - 1);
-        }
-        updates++;
-        if (updates > SORT_THRESHOLD_FACTOR) {
-            sortArrayList();
         }
     }
 
@@ -91,7 +63,6 @@ public class Node implements Comparable<Node> {
 
     // recursively sort the children after initial training.
     public void initialSort() {
-        sortArrayList();
         for (Node n : children) {
             n.initialSort();
         }

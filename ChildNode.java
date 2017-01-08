@@ -8,11 +8,35 @@ import java.util.List;
 
 public class ChildNode extends Node {
 
+    // The number of updates to the ArrayList since we last sorted it.
+    protected int updates = 0;
+
 
     public ChildNode(String word, int level, int MAX_LEVEL) {
         super(MAX_LEVEL);
         this.word = word;
         this.level = level;
+    }
+
+    // Insertion sort array list.
+    protected void sortArrayList() {
+        int noSorted = 1;
+        int index;
+        while (noSorted < children.size()) {
+            Node temp = children.get(noSorted);
+            for (index = noSorted; index > 0; index--) {
+                if (temp.compareTo(children.get(index - 1)) < 0) {
+                    children.set(index, children.get(index - 1));
+                    childrenIndex.put(children.get(index - 1).getWord(), index);
+                } else {
+                    break;
+                }
+            }
+            children.set(index, temp);
+            childrenIndex.put(temp.getWord(), index);
+            noSorted += 1;
+        }
+        updates = 0;
     }
 
     @Override
@@ -32,7 +56,7 @@ public class ChildNode extends Node {
                 childrenIndex.put(nextWord, children.size() - 1);
             }
             updates++;
-            if (updates > SORT_THRESHOLD_FACTOR / (level + 2) / (level + 2)) {
+            if ((this.level + 1 == MAX_LEVEL) && (updates > SORT_THRESHOLD_FACTOR / (level + 2) / (level + 2))) {
                 sortArrayList();
             }
         }
@@ -59,7 +83,10 @@ public class ChildNode extends Node {
 
     @Override
     public void initialSort() {
-        sortArrayList();
+        if (this.level + 1 == MAX_LEVEL) {
+            sortArrayList();
+            return;
+        }
         for (Node n : children) {
             n.initialSort();
         }
