@@ -75,6 +75,10 @@ public class WordPredictor {
 		return getPrediction(NGram.getQuadGram(input.toLowerCase()));
 	}
 
+	public List<String> getCompletion(String prefix) {
+		return null;
+	}
+
 	// Process and  an input String from the user to the tree.
 	public void addString(String str) {
 		addSentences(InputProcessor.processInputString(str));

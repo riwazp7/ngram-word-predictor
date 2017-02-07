@@ -20,7 +20,7 @@ public class GUI extends JFrame {
     public static final long serialVersionUID = 1L;
 
     // used to suggest words to the user
-	List<JButton> buttons = new ArrayList<>();
+	private List<JButton> buttons = new ArrayList<>();
 
 	// user should push this button when they have completed a sentence
     private JButton endSentence = new JButton("Save");
