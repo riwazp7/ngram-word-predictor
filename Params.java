@@ -11,7 +11,7 @@ public class Params {
     public static final String BLANK = "\1";
 
     // Unprintable char that represents the end of a word in a WordTrie
-    public static final String END = "\2";
+    public static final Character END = '\2';
 
     // File with words to filter.
     public static final String WORDS_TO_FILTER = "curseWords.txt";
