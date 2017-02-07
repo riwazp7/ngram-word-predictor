@@ -1,4 +1,4 @@
-/** Node.java
+/** WordNode.java
  *  Suoerclass of all nodes. This class itself is the node at the highest level in the tree.
  *  Maintains word, its count at this branch, and its children.
  *  Children are sorted by their count so that predicting is fast. A hash map is maintained with the index of
@@ -13,12 +13,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Node implements Comparable<Node> {
+public class WordNode implements Comparable<WordNode> {
 
     // Max updates to the ArrayList before we sort it.
     protected final int SORT_THRESHOLD_FACTOR = Params.SORT_THRESHOLD_FACTOR;
 
-    ArrayList<Node> children = new ArrayList<>();
+    ArrayList<WordNode> children = new ArrayList<>();
     HashMap<String, Integer> childrenIndex = new HashMap<>();
 
     // Max level of the tree this node belongs to
@@ -31,7 +31,7 @@ public class Node implements Comparable<Node> {
     // This node's level. -1 for top level node.
     protected int level = -1;
 
-    public Node(int MAX_LEVEL) {
+    public WordNode(int MAX_LEVEL) {
         this.MAX_LEVEL = MAX_LEVEL;
     }
 
@@ -40,7 +40,7 @@ public class Node implements Comparable<Node> {
         if (childrenIndex.containsKey(nextWord)) {
             children.get(childrenIndex.get(nextWord)).add(p);
         } else {
-            ChildNode child = new ChildNode(nextWord, level + 1, MAX_LEVEL);
+            ChildWordNode child = new ChildWordNode(nextWord, level + 1, MAX_LEVEL);
             children.add(child);
             child.add(p);
             childrenIndex.put(nextWord, children.size() - 1);
@@ -54,7 +54,7 @@ public class Node implements Comparable<Node> {
         if (childrenIndex.containsKey(nextWord)) {
             children.get(childrenIndex.get(nextWord)).add(p);
         } else {
-            ChildNode child = new ChildNode(nextWord, level + 1, MAX_LEVEL);
+            ChildWordNode child = new ChildWordNode(nextWord, level + 1, MAX_LEVEL);
             children.add(child);
             child.initialAdd(p);
             childrenIndex.put(nextWord, children.size() - 1);
@@ -63,7 +63,7 @@ public class Node implements Comparable<Node> {
 
     // recursively sort the children after initial training.
     public void initialSort() {
-        for (Node n : children) {
+        for (WordNode n : children) {
             n.initialSort();
         }
     }
@@ -83,14 +83,14 @@ public class Node implements Comparable<Node> {
     // Recursively create a String repr of this node and its children.
     public String toString(String soFar) {
         String result = "";
-        for (Node n : children) {
+        for (WordNode n : children) {
             result += (n.toString(""));
         }
         return result;
     }
 
     @Override
-    public int compareTo(Node n) {
+    public int compareTo(WordNode n) {
         return n.count.compareTo(this.count);
     }
 

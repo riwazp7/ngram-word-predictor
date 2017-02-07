@@ -1,4 +1,4 @@
-/** ChildNode.java
+/** ChildWordNode.java
  *  Represents all nodes not at the top level.
  *  (c) Riwaz Poudyal, Julian Vera 2016
  */
@@ -6,13 +6,13 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChildNode extends Node {
+public class ChildWordNode extends WordNode {
 
     // The number of updates to the ArrayList since we last sorted it.
     protected int updates = 0;
 
 
-    public ChildNode(String word, int level, int MAX_LEVEL) {
+    public ChildWordNode(String word, int level, int MAX_LEVEL) {
         super(MAX_LEVEL);
         this.word = word;
         this.level = level;
@@ -23,7 +23,7 @@ public class ChildNode extends Node {
         int noSorted = 1;
         int index;
         while (noSorted < children.size()) {
-            Node temp = children.get(noSorted);
+            WordNode temp = children.get(noSorted);
             for (index = noSorted; index > 0; index--) {
                 if (temp.compareTo(children.get(index - 1)) < 0) {
                     children.set(index, children.get(index - 1));
@@ -50,7 +50,7 @@ public class ChildNode extends Node {
             if (childrenIndex.containsKey(nextWord)) {
                 children.get(childrenIndex.get(nextWord)).add(p);
             } else {
-                ChildNode child = new ChildNode(nextWord, level + 1, MAX_LEVEL);
+                ChildWordNode child = new ChildWordNode(nextWord, level + 1, MAX_LEVEL);
                 children.add(child);
                 child.add(p);
                 childrenIndex.put(nextWord, children.size() - 1);
@@ -73,7 +73,7 @@ public class ChildNode extends Node {
             if (childrenIndex.containsKey(nextWord)) {
                 children.get(childrenIndex.get(nextWord)).add(p);
             } else {
-                ChildNode child = new ChildNode(nextWord, level + 1, MAX_LEVEL);
+                ChildWordNode child = new ChildWordNode(nextWord, level + 1, MAX_LEVEL);
                 children.add(child);
                 child.initialAdd(p);
                 childrenIndex.put(nextWord, children.size() - 1);
@@ -87,7 +87,7 @@ public class ChildNode extends Node {
             sortArrayList();
             return;
         }
-        for (Node n : children) {
+        for (WordNode n : children) {
             n.initialSort();
         }
     }
@@ -96,7 +96,7 @@ public class ChildNode extends Node {
         soFar = soFar + word + ": " + count + " ";
         if (children.isEmpty()) return soFar + "\n";
         String result = "";
-        for (Node n : children) {
+        for (WordNode n : children) {
             result += (n.toString(soFar) + "\n");
         }
         return result.substring(0,result.length() - 1);
