@@ -23,8 +23,12 @@ public class WordTrie {
         n.add(Params.END);
     }
 
-    public List<String> completeWord(List<Character> word) {
-        return null;
+    public List<String> completeWord(String word) {
+        CharNode n = root;
+        for (int i = 0; i < word.length(); i++) {
+            char c = word.charAt(i);
+            
+        }
     }
 
 }
